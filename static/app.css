@@ -1,0 +1,58 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Open_Sans/static/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Archivo Black';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Archivo_Black/ArchivoBlack-Regular.ttf') format('truetype');
+}
+
+:root {
+  /* --c-brand: #1064E4; */
+  --c-brand: #1874d0;
+  --c-brand-light: #74A5EF;
+  --c-black: #3F4654;
+  --c-accent-brand: #D7E4FB;
+  --c-accent-black: #DEDFE6;
+  --c-white: #FAFAFF;
+
+  --c-error: #ff4d4f;
+  --c-success: #5FE17C;
+  --c-accent-success: #E3F6EB;
+  --c-warning: #faad14;
+  --c-info: #1890ff;
+
+  --opacity-on-brand: 0.42;
+
+  --max-width: 1480px;
+
+  --font-highlight: 'Archivo Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-body: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+}
+
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+			'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		display: flex;
+		flex-flow: column;
+		min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Archivo Black', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
