@@ -9,11 +9,11 @@
 		},
 		{
 			label: 'Browse',
-			href: '/browse'
+			href: '/'
 		},
 		{
 			label: 'Register',
-			href: '/about',
+			href: '/',
 			isHighlighted: true
 		}
 	];
