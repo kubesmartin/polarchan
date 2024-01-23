@@ -5,6 +5,7 @@
 	import IntroBoxes from '$lib/components/IntroBoxes.svelte';
 	import UniversityContribution from '$lib/components/UniversityContribution.svelte';
 	import About from '$lib/components/About.svelte';
+	import ItemShowcase from '$lib/components/ItemShowcase.svelte';
 </script>
 
 <BorderWrap>
@@ -12,6 +13,7 @@
 		<h1>Page not found</h1>
 	</Hero>
 	<IntroBoxes />
+	<ItemShowcase />
 	<UniversityContribution />
 	<About />
 </BorderWrap>
