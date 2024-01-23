@@ -28,7 +28,7 @@
 
 <style>
 	header {
-		background-image: url('./PolARCHAN_hero_bg.jpg');
+		background-image: url('/PolARCHAN_hero_bg.jpg');
 		background-size: cover;
 		background-position: center;
 		padding: 1.8rem;
