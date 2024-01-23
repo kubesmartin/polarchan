@@ -12,7 +12,7 @@
 			<div class="holder">
 				<div>
 					<h1>Archive, browse and analyse political advertisement.</h1>
-					<Button href="/browse">Start browsing</Button>
+					<Button href="/">Start browsing</Button>
 				</div>
 				<div class="quote-holder">
 					<Quote
