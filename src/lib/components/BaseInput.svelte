@@ -42,6 +42,7 @@
 		padding: 0.5rem;
 		font-size: 1rem;
 		border: 1px solid var(--c-black);
+		background: var(--c-white);
 		color: var(--c-black);
 		box-sizing: border-box;
 	}
