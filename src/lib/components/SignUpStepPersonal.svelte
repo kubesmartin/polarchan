@@ -1,40 +1,34 @@
 <script lang="ts">
-	import type { SignUpPersonalInfoType } from '$lib/types/signUpStepTypes';
 	import BaseInput from './BaseInput.svelte';
 	import ErrorMessage from './ErrorMessage.svelte';
 	import SubmitButton from './SubmitButton.svelte';
+	import type { Writable } from 'svelte/store';
+	import type { SignUpPersonalInfoFormType } from '$lib/stores/personalInfoStore';
+	import { createEventDispatcher } from 'svelte';
 
-	export let personalData: SignUpPersonalInfoType | null;
+	export let store: Writable<SignUpPersonalInfoFormType>;
 
 	let passwordMatchError: boolean;
 	let passwordTooShortError: boolean;
 
-	let titlesBefore = '';
-	let titlesAfter = '';
-	let firstName = '';
-	let lastName = '';
-	let email = '';
-	let password = '';
-	let passwordConfirm = '';
+	const dispatch = createEventDispatcher();
 
 	const submit = () => {
-		if (password !== passwordConfirm) {
+		if (!$store.password) return;
+
+		if ($store.password !== $store.passwordConfirm) {
 			passwordMatchError = true;
 			return;
 		}
-		if (password.length < 6) {
+		passwordMatchError = false;
+
+		if ($store.password.length < 6) {
 			passwordTooShortError = true;
 			return;
 		}
-		const personalInfo: SignUpPersonalInfoType = {
-			titlesBefore,
-			titlesAfter,
-			firstName,
-			lastName,
-			email,
-			password
-		};
-		personalData = personalInfo;
+		passwordTooShortError = false;
+
+		dispatch('validSubmit');
 	};
 </script>
 
@@ -44,19 +38,30 @@
 			id="titleBefore"
 			label="Title(s) before name"
 			type="text"
-			bind:value={titlesBefore}
+			bind:value={$store.titlesBefore}
 		/>
-		<BaseInput id="titleAfter" label="Title(s) after name" type="text" bind:value={titlesAfter} />
-		<BaseInput id="firstName" label="First name" type="text" bind:value={firstName} required />
-		<BaseInput id="lastName" label="Last name" type="text" bind:value={lastName} required />
+		<BaseInput
+			id="titleAfter"
+			label="Title(s) after name"
+			type="text"
+			bind:value={$store.titlesAfter}
+		/>
+		<BaseInput
+			id="firstName"
+			label="First name"
+			type="text"
+			bind:value={$store.firstName}
+			required
+		/>
+		<BaseInput id="lastName" label="Last name" type="text" bind:value={$store.lastName} required />
 	</div>
-	<BaseInput id="email" label="Email" type="email" bind:value={email} required />
-	<BaseInput id="password" label="Password" type="password" bind:value={password} required />
+	<BaseInput id="email" label="Email" type="email" bind:value={$store.email} required />
+	<BaseInput id="password" label="Password" type="password" bind:value={$store.password} required />
 	<BaseInput
 		id="passwordConfirm"
 		label="Confirm password"
 		type="password"
-		bind:value={passwordConfirm}
+		bind:value={$store.passwordConfirm}
 		required
 	/>
 	<div class="submit-holder">

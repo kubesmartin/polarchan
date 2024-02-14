@@ -1,22 +1,12 @@
 <script lang="ts">
 	import SignUpStepIndicator from '$lib/components/SignUpStepIndicator.svelte';
 	import SignUpStepPersonal from './SignUpStepPersonal.svelte';
-	import type {
-		SignUpPersonalInfoType,
-		SignUpInstitutionInfoType
-	} from '$lib/types/signUpStepTypes';
+	import SignUpStepInstitution from './SignUpStepInstitution.svelte';
+	import { personalInfoFormData, institutionInfoFormData } from '$lib/stores/personalInfoStore';
+	import SignUpStepConfirmation from './SignUpStepConfirmation.svelte';
 
 	const steps = ['Personal information', 'Institution information', 'Confirmation'];
 	let currentStep = 0;
-	let personalData: null | SignUpPersonalInfoType = null;
-	let institutionData: null | SignUpInstitutionInfoType = null;
-
-	$: if (personalData) {
-		currentStep = 1;
-	}
-	$: if (institutionData) {
-		currentStep = 2;
-	}
 </script>
 
 <div class="holder">
@@ -30,12 +20,20 @@
 </div>
 <div class="step">
 	{#if currentStep === 0}
-		<SignUpStepPersonal bind:personalData />
+		<SignUpStepPersonal store={personalInfoFormData} on:validSubmit={() => (currentStep = 1)} />
 	{/if}
 	{#if currentStep === 1}
-		boo
+		<SignUpStepInstitution
+			store={institutionInfoFormData}
+			on:validSubmit={() => (currentStep = 2)}
+		/>
 	{/if}
-	{#if currentStep === 2}{/if}
+	{#if currentStep === 2}
+		<SignUpStepConfirmation
+			personalStore={personalInfoFormData}
+			institutionStore={institutionInfoFormData}
+		/>
+	{/if}
 </div>
 
 <style>
