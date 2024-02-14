@@ -7,6 +7,12 @@
 
 	const steps = ['Personal information', 'Institution information', 'Confirmation'];
 	let currentStep = 0;
+
+	const switchStepByClick = (step: number) => {
+		if (step < currentStep) {
+			currentStep = step;
+		}
+	};
 </script>
 
 <div class="holder">
@@ -15,6 +21,7 @@
 			step={i + 1}
 			content={step}
 			status={i === currentStep ? 'active' : i < currentStep ? 'done' : 'pending'}
+			on:click={() => switchStepByClick(i)}
 		/>
 	{/each}
 </div>
@@ -43,6 +50,6 @@
 		gap: 0.5rem 1.5rem;
 	}
 	.step {
-		margin-top: 2rem;
+		margin-top: 4rem;
 	}
 </style>

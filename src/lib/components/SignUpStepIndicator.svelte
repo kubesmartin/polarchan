@@ -9,6 +9,7 @@
 	class:active={status === `active`}
 	class:done={status === `done`}
 	class:pending={status === `pending`}
+	on:click
 >
 	<div class="number">
 		{step}
@@ -52,6 +53,10 @@
 
 	p {
 		margin: 0;
+	}
+
+	.done {
+		cursor: pointer;
 	}
 
 	.active .content {

@@ -11,6 +11,7 @@
 		border-bottom: 0;
 		background-color: var(--c-white);
 		width: 100%;
+		min-height: calc(100vh - 1.2rem);
 		box-sizing: border-box;
 	}
 </style>
