@@ -1,6 +1,7 @@
 <script lang="ts">
 	import WidthHolder from './WidthHolder.svelte';
 	import NavItem from './NavItem.svelte';
+	import PolarchanLogo from './PolarchanLogo.svelte';
 
 	const menuItems = [
 		{
@@ -22,7 +23,7 @@
 <div class="outer-holder">
 	<WidthHolder>
 		<div class="holder">
-			<img src="./PolARCHAN.png" alt="PolARCHAN logo" class="logo" />
+			<PolarchanLogo />
 			<nav>
 				{#each menuItems as item}
 					<NavItem href={item.href} label={item.label} isHighlighted={item.isHighlighted} />
@@ -36,11 +37,6 @@
 	.outer-holder {
 		background-color: none;
 		padding-block: 1.8rem;
-	}
-	.logo {
-		height: 35px;
-		width: auto;
-		flex-shrink: 0;
 	}
 	.holder {
 		display: flex;
