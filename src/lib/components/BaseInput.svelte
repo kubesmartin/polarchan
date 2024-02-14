@@ -6,9 +6,10 @@
 	export let required: boolean = false;
 	export let disabled: boolean = false;
 	export let type: 'text' | 'email' | 'password' = 'text';
+	export let isErrored: boolean = false;
 </script>
 
-<label for={id}>
+<label for={id} class:isErrored>
 	<span class="label">
 		<span>
 			{label}
@@ -43,5 +44,11 @@
 		border: 1px solid var(--c-black);
 		color: var(--c-black);
 		box-sizing: border-box;
+	}
+	.isErrored {
+		color: var(--c-error);
+	}
+	.isErrored input {
+		border-color: var(--c-error);
 	}
 </style>

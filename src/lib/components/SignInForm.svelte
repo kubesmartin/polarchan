@@ -11,6 +11,7 @@
 	let email = '';
 	let password = '';
 	let loginError = '';
+	let isErrored = false;
 
 	const login = async () => {
 		try {
@@ -23,6 +24,7 @@
 				// check if error has a code property (Firebase error objects have a code property)
 				if ('code' in error) {
 					if (error.code === 'auth/invalid-credential') {
+						isErrored = true;
 						loginError = 'Wrong email or password';
 						return;
 					}
@@ -37,13 +39,21 @@
 <form on:submit|preventDefault={login}>
 	<PolarchanLogo />
 	<div class="input-holder">
-		<BaseInput id="email__login" label="Email" type="email" bind:value={email} required />
+		<BaseInput
+			id="email__login"
+			label="Email"
+			type="email"
+			bind:value={email}
+			required
+			bind:isErrored
+		/>
 		<BaseInput
 			id="password__login"
 			label="Password"
 			type="password"
 			bind:value={password}
 			required
+			bind:isErrored
 		/>
 	</div>
 	<div class="text-holder">
