@@ -1,6 +1,8 @@
 import type { PoliticalItem } from './PoliticalItem';
 
 export interface MassPrintedPoliticalItem extends PoliticalItem {
+	type: 'mass-printed';
+
 	/**
 	 * Type of printing
 	 * @type {string} type of printing

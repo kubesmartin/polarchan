@@ -25,6 +25,8 @@ export interface PoliticalItem {
 	 */
 	date: Date;
 
+	type: 'mass-printed' | 'spot' | 'other';
+
 	/**
 	 * Pointer to the type of election
 	 * @type {string} type of election id pointing to the type of election
@@ -53,5 +55,10 @@ export const isValidPoliticalItem = (item: unknown): item is PoliticalItem => {
 	if (!isString(item.typeOfElectionId)) return false;
 	if (!isString(item.politicalSubjectId)) return false;
 	if (!isString(item.typeOfPoliticalItem)) return false;
+	if (!isValidPoliticalItemType(item.type)) return false;
 	return true;
+};
+
+const isValidPoliticalItemType = (type: unknown): type is PoliticalItem['type'] => {
+	return isString(type) && ['mass-printed', 'spot', 'other'].includes(type);
 };
