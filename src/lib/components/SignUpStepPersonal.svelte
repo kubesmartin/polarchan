@@ -1,10 +1,9 @@
 <script lang="ts">
 	import BaseInput from './BaseInput.svelte';
-	import ErrorMessage from './ErrorMessage.svelte';
-	import SubmitButton from './SubmitButton.svelte';
 	import type { Writable } from 'svelte/store';
 	import type { SignUpPersonalInfoFormType } from '$lib/stores/personalInfoStore';
 	import { createEventDispatcher } from 'svelte';
+	import SubmitHolder from './SubmitHolder.svelte';
 
 	export let store: Writable<SignUpPersonalInfoFormType>;
 
@@ -64,19 +63,12 @@
 		bind:value={$store.passwordConfirm}
 		required
 	/>
-	<div class="submit-holder">
-		<div class="error-holder">
-			{#if passwordMatchError}
-				<ErrorMessage message="Passwords do not match" />
-			{/if}
-			{#if passwordTooShortError}
-				<ErrorMessage message="Password must be at least 6 characters long" />
-			{/if}
-		</div>
-		<div class="submit-holder__button">
-			<SubmitButton>Next step</SubmitButton>
-		</div>
-	</div>
+	<SubmitHolder
+		errors={[
+			passwordMatchError ? 'Passwords do not match' : '',
+			passwordTooShortError ? 'Password must be at least 6 characters long' : ''
+		]}
+	/>
 </form>
 
 <style>
@@ -84,18 +76,6 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 1rem;
-	}
-	.submit-holder {
-		display: flex;
-		justify-content: space-between;
-	}
-	.error-holder {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-	.submit-holder__button {
-		margin-left: auto;
 	}
 	form {
 		display: grid;

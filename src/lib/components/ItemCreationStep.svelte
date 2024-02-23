@@ -2,8 +2,10 @@
 	import SignUpStepIndicator from '$lib/components/SignUpStepIndicator.svelte';
 	import FileUpload from './FileUpload.svelte';
 	import ItemCreationMetadata from './ItemCreationMetadata.svelte';
+	import { itemCreationStore, itemCreationFilesStore } from '$lib/stores/itemCreationStore';
+	import ItemCreationConfirm from './ItemCreationConfirm.svelte';
 
-	const steps = ['File upload', 'Add metadata', 'Confirmation'];
+	const steps = ['Files selection', 'Add metadata', 'Confirmation'];
 	let currentStep = 0;
 
 	const switchStepByClick = (step: number) => {
@@ -12,8 +14,7 @@
 		}
 	};
 
-	const startCreation = (event: CustomEvent<File[]>) => {
-		console.log(event.detail);
+	const startCreation = () => {
 		currentStep = 1;
 	};
 </script>
@@ -30,12 +31,14 @@
 </div>
 <div class="step">
 	{#if currentStep === 0}
-		<FileUpload on:filesUploaded={startCreation} />
+		<FileUpload store={itemCreationFilesStore} on:filesUploaded={startCreation} />
 	{/if}
 	{#if currentStep === 1}
-		<ItemCreationMetadata />
+		<ItemCreationMetadata store={itemCreationStore} on:validSubmit={() => (currentStep = 2)} />
 	{/if}
-	{#if currentStep === 2}{/if}
+	{#if currentStep === 2}
+		<ItemCreationConfirm metaDataStore={itemCreationStore} filesStore={itemCreationFilesStore} />
+	{/if}
 </div>
 
 <style>

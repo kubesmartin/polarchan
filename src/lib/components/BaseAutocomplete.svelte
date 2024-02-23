@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	export let label: string;
-	export let values: string[] = [];
+	export let values: string[] | string = '';
 	export let id: string;
 	export let placeholder: string = '';
 	export let required: boolean = false;
@@ -21,12 +21,17 @@
 	};
 
 	// Add or remove a value from the selection
+	// If values is a string, it's a single select
 	const toggleSelection = (optionValue: string) => {
-		const index = values.indexOf(optionValue);
-		if (index === -1) {
-			values = [...values, optionValue];
+		if (typeof values === 'string') {
+			values = optionValue;
 		} else {
-			values = values.filter((_, i) => i !== index);
+			const index = values.indexOf(optionValue);
+			if (index === -1) {
+				values = [...values, optionValue];
+			} else {
+				values = values.filter((_, i) => i !== index);
+			}
 		}
 		searchText = '';
 		updateFilteredOptions();
@@ -34,7 +39,11 @@
 
 	// Remove a chip
 	const removeChip = (chipValue: string) => {
-		values = values.filter((value) => value !== chipValue);
+		if (typeof values === 'string') {
+			values = '';
+		} else {
+			values = values.filter((value) => value !== chipValue);
+		}
 		updateFilteredOptions();
 	};
 
@@ -50,12 +59,6 @@
 			<span> *</span>
 		{/if}
 	</span>
-	<!-- add hidden selectbox -->
-	<select {id} bind:value={values} multiple hidden>
-		{#each values as value}
-			<option {value} selected />
-		{/each}
-	</select>
 	<input
 		type="text"
 		{id}
@@ -79,6 +82,9 @@
 				<button type="button" on:click={() => removeChip(value)}>×</button>
 			</span>
 		{/each}
+		{#if (typeof values === 'string' && values === '') || (Array.isArray(values) && values.length === 0)}
+			<span class="chip warning">None selected yet</span>
+		{/if}
 	</div>
 </label>
 
@@ -114,6 +120,10 @@
 		border: none;
 		background: transparent;
 		cursor: pointer;
+	}
+	.chip.warning {
+		padding-right: 0.5rem;
+		background: var(--c-warning);
 	}
 	.autocomplete-input {
 		display: block;

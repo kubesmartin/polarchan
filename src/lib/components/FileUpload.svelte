@@ -1,15 +1,15 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
-	import { writable } from 'svelte/store';
 	import { createEventDispatcher } from 'svelte';
 	import SubmitButton from './SubmitButton.svelte';
 
-	const files: Writable<File[]> = writable([]);
+	export let store: Writable<File[]>;
+
 	const dispatch = createEventDispatcher();
 
 	function handleFiles(selectedFiles: FileList) {
 		const fileList = Array.from(selectedFiles);
-		files.set(fileList);
+		store.set(fileList);
 	}
 
 	function handleDragOver(event: DragEvent) {
@@ -37,8 +37,8 @@
 	}
 
 	function proceed() {
-		if ($files.length > 0) {
-			dispatch('filesUploaded', $files);
+		if ($store.length > 0) {
+			dispatch('filesUploaded');
 		}
 	}
 </script>
@@ -58,12 +58,12 @@
 			<input type="file" multiple on:change={handleChange} hidden bind:this={fileInput} />
 			<button class="visible-button" tabindex="-1" on:click={openFileDialog}> Select files </button>
 			<span class="selected-files" aria-live="polite" role="status">
-				{#if $files.length === 0}
+				{#if $store.length === 0}
 					No files selected
 				{:else}
-					Selected files: {#each $files as file, i}
+					Selected files: {#each $store as file, i}
 						{file.name}
-						{#if i !== $files.length - 1},
+						{#if i !== $store.length - 1},
 						{/if}
 					{/each}
 				{/if}
@@ -71,7 +71,7 @@
 		</div>
 	</div>
 	<div class="submit-button-container">
-		<SubmitButton isDisabled={$files.length === 0}>Next step</SubmitButton>
+		<SubmitButton isDisabled={$store.length === 0}>Next step</SubmitButton>
 	</div>
 </form>
 
