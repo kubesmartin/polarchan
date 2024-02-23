@@ -1,4 +1,6 @@
-export abstract class PoliticalItem {
+import { isObject, isString, isValidDateFormat } from '../utility';
+
+export interface PoliticalItem {
 	/**
 	 * Identifier of the subject
 	 * @type {string} unique identifier
@@ -19,7 +21,7 @@ export abstract class PoliticalItem {
 
 	/**
 	 * Date of release (at least the year should be given, if not the full date)
-	 * @type {Date} date of release
+	 * @type {string} in YYYY-MM-DD format
 	 */
 	date: Date;
 
@@ -40,22 +42,16 @@ export abstract class PoliticalItem {
 	 * @type {string} type of political item name
 	 */
 	typeOfPoliticalItem: string;
-
-	constructor(
-		id: string,
-		name: string,
-		country: string,
-		date: Date,
-		typeOfElectionId: string,
-		politicalSubjectId: string,
-		typeOfPoliticalItem: string
-	) {
-		this.id = id;
-		this.name = name;
-		this.country = country;
-		this.date = date;
-		this.typeOfElectionId = typeOfElectionId;
-		this.politicalSubjectId = politicalSubjectId;
-		this.typeOfPoliticalItem = typeOfPoliticalItem;
-	}
 }
+
+export const isValidPoliticalItem = (item: unknown): item is PoliticalItem => {
+	if (!isObject(item)) return false;
+	if (!isString(item.id)) return false;
+	if (!isString(item.name)) return false;
+	if (!isString(item.country)) return false;
+	if (!isValidDateFormat(item.date)) return false;
+	if (!isString(item.typeOfElectionId)) return false;
+	if (!isString(item.politicalSubjectId)) return false;
+	if (!isString(item.typeOfPoliticalItem)) return false;
+	return true;
+};

@@ -1,6 +1,6 @@
-import { PoliticalItem } from './PoliticalItem';
+import type { PoliticalItem } from './PoliticalItem';
 
-export class MassPrintedPoliticalItem extends PoliticalItem {
+export interface MassPrintedPoliticalItem extends PoliticalItem {
 	/**
 	 * Type of printing
 	 * @type {string} type of printing
