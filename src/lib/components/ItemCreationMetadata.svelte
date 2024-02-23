@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { politicalSubjects } from '$lib/consts/politicalSubjects';
+	import BaseInput from './BaseInput.svelte';
+	import BaseSelect from './BaseSelect.svelte';
 	import BaseSelectMultiple from './BaseSelectMultiple.svelte';
 	import SubmitButton from './SubmitButton.svelte';
 	import { createEventDispatcher } from 'svelte';
@@ -12,12 +14,26 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
+	<BaseSelect
+		id="electionYear"
+		label="Election year"
+		options={[
+			{ id: '2', name: '2021' },
+			{ id: '3', name: '2024' }
+		]}
+		required
+	/>
 	<BaseSelectMultiple
 		id="politicalSubjects"
 		label="Political subjects (multiple, at least one required)"
 		options={politicalSubjects}
 		required
 		placeholder="Search for Czech political subjects by its official name (2024/2/1)"
+	/>
+	<BaseInput
+		id="coalition"
+		label="Because you selected more than one political subject, you can type in the name of the coalition"
+		type="text"
 	/>
 	<div class="submit-holder">
 		<div class="error-holder"></div>

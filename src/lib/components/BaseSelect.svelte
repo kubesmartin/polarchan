@@ -6,7 +6,7 @@
 	export let placeholder: string = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-	export let options: Array<{ value: string; text: string }> = [];
+	export let options: Array<{ id: string; name: string }> = [];
 	export let isErrored: boolean = false;
 
 	let filteredOptions = options;
@@ -14,13 +14,10 @@
 
 	// Update filtered options based on search text
 	const updateFilteredOptions = () => {
-		if (!searchText.trim()) {
-			filteredOptions = options;
-		} else {
-			filteredOptions = options.filter((option) =>
-				option.text.toLowerCase().includes(searchText.toLowerCase())
-			);
-		}
+		filteredOptions = options.filter(
+			(option) =>
+				option.name.toLowerCase().includes(searchText.toLowerCase()) && option.id !== value
+		);
 	};
 
 	// Watch for changes in search text to update the filtered options
@@ -30,7 +27,7 @@
 	const selectOption = (optionValue: string) => {
 		value = optionValue;
 		// Optionally, clear search text or keep the selected option's text
-		searchText = options.find((option) => option.value === optionValue)?.text || '';
+		searchText = options.find((option) => option.id === optionValue)?.name || '';
 	};
 
 	onMount(() => {
@@ -46,20 +43,25 @@
 			<span> *</span>
 		{/if}
 	</span>
+	<!-- add hidden selectbox -->
+	<select {id} bind:value multiple hidden {required} {disabled}>
+		{#each options as option}
+			<option value={option.id} selected={option.id === value}>{option.name}</option>
+		{/each}
+	</select>
 	<input
 		type="text"
 		{id}
 		bind:value={searchText}
 		on:input={updateFilteredOptions}
 		{placeholder}
-		{required}
 		{disabled}
 		class="autocomplete-input"
 	/>
 	{#if searchText}
 		<ul class="options-list">
 			{#each filteredOptions as option}
-				<li on:click={() => selectOption(option.value)}>{option.text}</li>
+				<li on:click={() => selectOption(option.id)}>{option.name}</li>
 			{/each}
 		</ul>
 	{/if}

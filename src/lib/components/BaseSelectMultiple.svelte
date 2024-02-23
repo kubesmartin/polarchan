@@ -50,13 +50,18 @@
 			<span> *</span>
 		{/if}
 	</span>
+	<!-- add hidden selectbox -->
+	<select {id} bind:value={values} multiple hidden>
+		{#each values as value}
+			<option {value} selected />
+		{/each}
+	</select>
 	<input
 		type="text"
 		{id}
 		bind:value={searchText}
 		on:input={updateFilteredOptions}
 		{placeholder}
-		{required}
 		{disabled}
 		class="autocomplete-input"
 	/>
