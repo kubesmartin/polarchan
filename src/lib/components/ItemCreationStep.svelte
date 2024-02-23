@@ -1,6 +1,7 @@
 <script lang="ts">
 	import SignUpStepIndicator from '$lib/components/SignUpStepIndicator.svelte';
 	import FileUpload from './FileUpload.svelte';
+	import ItemCreationMetadata from './ItemCreationMetadata.svelte';
 
 	const steps = ['File upload', 'Add metadata', 'Confirmation'];
 	let currentStep = 0;
@@ -31,7 +32,9 @@
 	{#if currentStep === 0}
 		<FileUpload on:filesUploaded={startCreation} />
 	{/if}
-	{#if currentStep === 1}{/if}
+	{#if currentStep === 1}
+		<ItemCreationMetadata />
+	{/if}
 	{#if currentStep === 2}{/if}
 </div>
 

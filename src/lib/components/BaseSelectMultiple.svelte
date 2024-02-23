@@ -1,40 +1,44 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	export let label: string;
-	export let value: string = '';
+	export let values: string[] = [];
 	export let id: string;
 	export let placeholder: string = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-	export let options: Array<{ value: string; text: string }> = [];
+	export let options: Array<{ id: string; name: string }> = [];
 	export let isErrored: boolean = false;
 
 	let filteredOptions = options;
 	let searchText = '';
 
-	// Update filtered options based on search text
+	// Filter options excluding already selected values
 	const updateFilteredOptions = () => {
-		if (!searchText.trim()) {
-			filteredOptions = options;
-		} else {
-			filteredOptions = options.filter((option) =>
-				option.text.toLowerCase().includes(searchText.toLowerCase())
-			);
-		}
+		filteredOptions = options.filter(
+			(option) =>
+				option.name.toLowerCase().includes(searchText.toLowerCase()) && !values.includes(option.id)
+		);
 	};
 
-	// Watch for changes in search text to update the filtered options
-	$: searchText, updateFilteredOptions();
+	// Add or remove a value from the selection
+	const toggleSelection = (optionValue: string) => {
+		const index = values.indexOf(optionValue);
+		if (index === -1) {
+			values = [...values, optionValue];
+		} else {
+			values = values.filter((_, i) => i !== index);
+		}
+		searchText = '';
+		updateFilteredOptions();
+	};
 
-	// Handle selection
-	const selectOption = (optionValue: string) => {
-		value = optionValue;
-		// Optionally, clear search text or keep the selected option's text
-		searchText = options.find((option) => option.value === optionValue)?.text || '';
+	// Remove a chip
+	const removeChip = (chipValue: string) => {
+		values = values.filter((value) => value !== chipValue);
+		updateFilteredOptions();
 	};
 
 	onMount(() => {
-		// Initialize filtered options
 		updateFilteredOptions();
 	});
 </script>
@@ -59,10 +63,18 @@
 	{#if searchText}
 		<ul class="options-list">
 			{#each filteredOptions as option}
-				<li on:click={() => selectOption(option.value)}>{option.text}</li>
+				<li on:click={() => toggleSelection(option.id)}>{option.name}</li>
 			{/each}
 		</ul>
 	{/if}
+	<div class="chips-container">
+		{#each values as value}
+			<span class="chip">
+				{options.find((option) => option.id === value)?.name || ''}
+				<button type="button" on:click={() => removeChip(value)}>×</button>
+			</span>
+		{/each}
+	</div>
 </label>
 
 <style>
@@ -74,6 +86,29 @@
 	.label {
 		padding-inline: 0.5rem;
 		font-size: 0.8rem;
+	}
+	.chips-container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		margin-top: 0.25rem;
+	}
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.25rem 0.5rem;
+		background-color: var(--c-light);
+		font-size: 0.8rem;
+		background: var(--c-brand);
+		color: var(--c-white);
+		padding-right: 0;
+	}
+	.chip button {
+		margin-left: 0.3rem;
+		color: var(--c-white);
+		border: none;
+		background: transparent;
+		cursor: pointer;
 	}
 	.autocomplete-input {
 		display: block;

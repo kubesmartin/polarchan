@@ -1,13 +1,10 @@
 <script lang="ts">
-	import type { SignUpInstituionInfoFormType } from '$lib/stores/personalInfoStore';
-	import type { Writable } from 'svelte/store';
-	import BaseInput from './BaseInput.svelte';
+	import { politicalSubjects } from '$lib/consts/politicalSubjects';
+	import BaseSelectMultiple from './BaseSelectMultiple.svelte';
 	import SubmitButton from './SubmitButton.svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
-
-	export let store: Writable<SignUpInstituionInfoFormType>;
 
 	const submit = () => {
 		dispatch('validSubmit');
@@ -15,21 +12,13 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-	<BaseInput
-		id="institutionName"
-		label="Institution name"
-		type="text"
-		bind:value={$store.institutionName}
+	<BaseSelectMultiple
+		id="politicalSubjects"
+		label="Political subjects (multiple, at least one required)"
+		options={politicalSubjects}
 		required
+		placeholder="Search for Czech political subjects by its official name (2024/2/1)"
 	/>
-	<BaseInput
-		id="primaryDepartment"
-		label="Primary department"
-		type="text"
-		bind:value={$store.primaryDepartment}
-		required
-	/>
-	<BaseInput id="status" label="Status" type="text" bind:value={$store.status} required />
 	<div class="submit-holder">
 		<div class="error-holder"></div>
 		<div class="submit-holder__button">
