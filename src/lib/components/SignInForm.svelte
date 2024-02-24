@@ -2,23 +2,26 @@
 	import SubmitButton from './SubmitButton.svelte';
 	import BaseInput from './BaseInput.svelte';
 	import PolarchanLogo from './PolarchanLogo.svelte';
-	import { signInWithEmailAndPassword } from 'firebase/auth';
-	import { auth } from '$lib/firebase';
-	import { user } from '$lib/stores';
 	import ErrorMessage from './ErrorMessage.svelte';
 	import { goto } from '$app/navigation';
+	import type { IAuthService } from '$lib/interfaces/IAuthService';
+	import { getContext } from 'svelte';
 
 	let email = '';
 	let password = '';
 	let loginError = '';
 	let isErrored = false;
 
+	const auth: IAuthService = getContext('auth');
+
 	const login = async () => {
 		try {
-			const userCredential = await signInWithEmailAndPassword(auth, email, password);
-			user.set(userCredential.user);
-			goto('/dashboard');
+			await auth.login(email, password);
+			if (auth.getCurrentUser()) {
+				goto('/dashboard');
+			}
 		} catch (error) {
+			console.error(error);
 			// check if error is an object
 			if (typeof error === 'object' && error !== null) {
 				// check if error has a code property (Firebase error objects have a code property)
@@ -29,9 +32,13 @@
 						return;
 					}
 				}
+				if ('message' in error && typeof error.message === 'string') {
+					isErrored = true;
+					loginError = error.message;
+					return;
+				}
 			}
 			loginError = 'Unknown error occurred';
-			user.set(null);
 		}
 	};
 </script>
