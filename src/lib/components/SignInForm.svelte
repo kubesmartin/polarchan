@@ -13,11 +13,12 @@
 	let isErrored = false;
 
 	const auth: IAuthService = getContext('auth');
+	const store = auth.store;
 
 	const login = async () => {
 		try {
 			await auth.login(email, password);
-			if (auth.getCurrentUser()) {
+			if ($store) {
 				goto('/dashboard');
 			}
 		} catch (error) {

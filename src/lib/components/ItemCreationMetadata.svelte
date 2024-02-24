@@ -15,8 +15,8 @@
 	let errors: string[] = [];
 
 	const submit = () => {
+		console.log($store);
 		if (
-			!$store.name ||
 			!$store.country ||
 			!$store.typeOfElectionId ||
 			!$store.politicalSubjectIds.length ||
