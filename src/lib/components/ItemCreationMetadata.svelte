@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { czechPoliticalSubjects } from '$lib/consts/czechPoliticalSubjects';
-	import { states } from '$lib/consts/states';
 	import { electionTypes } from '$lib/consts/electionTypes';
 	import type { Writable } from 'svelte/store';
 	import BaseInput from './BaseInput.svelte';
@@ -23,7 +22,7 @@
 			!$store.country ||
 			!$store.typeOfElectionId ||
 			!$store.politicalSubjectIds.length ||
-			!$store.date
+			!$store.electionYear
 		) {
 			errors = ['Please fill in all required fields'];
 			return;
@@ -72,13 +71,6 @@
 			bind:value={$store.coalitionName}
 		/>
 	{/if}
-	<BaseInput
-		id="date"
-		label="Date when the material was (i) published or (ii) broadcasted or (iii) seen"
-		type="date"
-		bind:value={$store.date}
-		required
-	/>
 	<BaseSelect
 		id="typeOfPoliticalItem"
 		label="Type of the material"

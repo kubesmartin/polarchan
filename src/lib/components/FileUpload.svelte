@@ -4,12 +4,14 @@
 	import SubmitButton from './SubmitButton.svelte';
 
 	export let store: Writable<File[]>;
+	let blockSubmit = false;
 
 	const dispatch = createEventDispatcher();
 
 	function handleFiles(selectedFiles: FileList) {
 		const fileList = Array.from(selectedFiles);
 		store.set(fileList);
+		blockSubmit = false;
 	}
 
 	function handleDragOver(event: DragEvent) {
@@ -33,10 +35,17 @@
 	let fileInput: HTMLInputElement;
 
 	function openFileDialog() {
+		// if has files, block submit
+		if ($store.length > 0) {
+			blockSubmit = true;
+		}
 		fileInput.click(); // Trigger the file input click event
 	}
 
 	function proceed() {
+		if (blockSubmit) {
+			return;
+		}
 		if ($store.length > 0) {
 			dispatch('filesUploaded');
 		}

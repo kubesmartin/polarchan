@@ -12,7 +12,7 @@ export const saveItem = async (item: PoliticalItemForm, files: File[]): Promise<
 	const storagePromises: Promise<string>[] = [];
 	for (let i = 0; i < files.length; i++) {
 		const file = files[i];
-		const storageRefPath = `pi/${Date.now()}/${i}-${file.name}`;
+		const storageRefPath = `materials/${Date.now()}/${i}-${file.name}`;
 		const fileRef = storageRef(storage, storageRefPath);
 		await uploadBytes(fileRef, file);
 		const downloadUrl = await getDownloadURL(fileRef);
@@ -25,7 +25,7 @@ export const saveItem = async (item: PoliticalItemForm, files: File[]): Promise<
 	// construct correct upload object with all key:value pairs defined
 	const baseUploadObject = {
 		country: item.country,
-		date: item.date,
+		year: item.electionYear,
 		typeOfElectionId: item.typeOfElectionId,
 		politicalSubjectIds: item.politicalSubjectIds,
 		typeOfPoliticalItem: item.typeOfPoliticalItem,

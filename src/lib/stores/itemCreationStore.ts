@@ -5,7 +5,6 @@ import type { PoliticalItem } from '../types/PoliticalItem/PoliticalItem';
 export interface PoliticalItemForm {
 	name: string | undefined;
 	country: string | undefined;
-	date: string | undefined;
 	typeOfElectionId: string | undefined;
 	electionYear: number | undefined;
 	politicalSubjectIds: string[];
@@ -17,13 +16,12 @@ export interface PoliticalItemForm {
 export const itemCreationStore: Writable<PoliticalItemForm> = writable({
 	name: undefined,
 	country: 'cz',
-	date: undefined,
 	typeOfElectionId: undefined,
 	politicalSubjectIds: [],
 	coalitionName: undefined,
 	typeOfPoliticalItem: undefined,
 	additionalInformation: undefined,
-	electionYear: undefined
+	electionYear: new Date().getFullYear()
 });
 
 export const itemCreationFilesStore: Writable<File[]> = writable([]);
