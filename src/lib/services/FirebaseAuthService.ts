@@ -1,6 +1,6 @@
 // src/services/AuthService.ts
 import type { IAuthService } from '../interfaces/IAuthService';
-import { auth, db } from '../firebase';
+import { auth, db } from '$lib/firebase';
 import {
 	signInWithEmailAndPassword,
 	signOut,
