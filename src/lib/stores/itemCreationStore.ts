@@ -7,6 +7,7 @@ export interface PoliticalItemForm {
 	country: string | undefined;
 	date: string | undefined;
 	typeOfElectionId: string | undefined;
+	electionYear: number | undefined;
 	politicalSubjectIds: string[];
 	coalitionName: string | undefined;
 	typeOfPoliticalItem: PoliticalItem['typeOfPoliticalItem'] | undefined;
@@ -15,13 +16,14 @@ export interface PoliticalItemForm {
 
 export const itemCreationStore: Writable<PoliticalItemForm> = writable({
 	name: undefined,
-	country: undefined,
+	country: 'cz',
 	date: undefined,
 	typeOfElectionId: undefined,
 	politicalSubjectIds: [],
 	coalitionName: undefined,
 	typeOfPoliticalItem: undefined,
-	additionalInformation: undefined
+	additionalInformation: undefined,
+	electionYear: undefined
 });
 
 export const itemCreationFilesStore: Writable<File[]> = writable([]);

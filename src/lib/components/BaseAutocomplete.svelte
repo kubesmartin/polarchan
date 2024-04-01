@@ -1,54 +1,42 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { updateFilteredOptions } from '$lib/utils/filtering';
 	export let label: string;
-	export let values: string[] | string = '';
+	export let values: string[] = [];
 	export let id: string;
 	export let placeholder: string = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-	export let options: Array<{ id: string; name: string }> = [];
+	export let options: Array<{ id: string; name: string; abbreviation?: string }> = [];
 	export let isErrored: boolean = false;
 
 	let filteredOptions = options;
 	let searchText = '';
 
-	// Filter options excluding already selected values
-	const updateFilteredOptions = () => {
-		filteredOptions = options.filter(
-			(option) =>
-				option.name.toLowerCase().includes(searchText.toLowerCase()) && !values.includes(option.id)
-		);
-	};
+	const updateFilteredOptionsFn = () =>
+		(filteredOptions = updateFilteredOptions(searchText, options, values));
 
 	// Add or remove a value from the selection
 	// If values is a string, it's a single select
 	const toggleSelection = (optionValue: string) => {
-		if (typeof values === 'string') {
-			values = optionValue;
+		const index = values.indexOf(optionValue);
+		if (index === -1) {
+			values = [...values, optionValue];
 		} else {
-			const index = values.indexOf(optionValue);
-			if (index === -1) {
-				values = [...values, optionValue];
-			} else {
-				values = values.filter((_, i) => i !== index);
-			}
+			values = values.filter((_, i) => i !== index);
 		}
 		searchText = '';
-		updateFilteredOptions();
+		updateFilteredOptionsFn();
 	};
 
 	// Remove a chip
 	const removeChip = (chipValue: string) => {
-		if (typeof values === 'string') {
-			values = '';
-		} else {
-			values = values.filter((value) => value !== chipValue);
-		}
-		updateFilteredOptions();
+		values = values.filter((value) => value !== chipValue);
+		updateFilteredOptionsFn();
 	};
 
 	onMount(() => {
-		updateFilteredOptions();
+		updateFilteredOptionsFn();
 	});
 </script>
 
@@ -63,7 +51,7 @@
 		type="text"
 		{id}
 		bind:value={searchText}
-		on:input={updateFilteredOptions}
+		on:input={updateFilteredOptionsFn}
 		{placeholder}
 		{disabled}
 		class="autocomplete-input"

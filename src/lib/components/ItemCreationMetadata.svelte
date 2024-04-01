@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { politicalSubjects } from '$lib/consts/politicalSubjects';
+	import { czechPoliticalSubjects } from '$lib/consts/czechPoliticalSubjects';
+	import { states } from '$lib/consts/states';
+	import { electionTypes } from '$lib/consts/electionTypes';
 	import type { Writable } from 'svelte/store';
 	import BaseInput from './BaseInput.svelte';
 	import BaseSelectMultiple from './BaseAutocomplete.svelte';
@@ -7,6 +9,7 @@
 	import type { PoliticalItemForm } from '$lib/stores/itemCreationStore';
 	import SubmitHolder from './SubmitHolder.svelte';
 	import BaseSelect from './BaseSelect.svelte';
+	import NumericalInput from './NumericalInput.svelte';
 
 	const dispatch = createEventDispatcher();
 
@@ -31,26 +34,34 @@
 </script>
 
 <form on:submit|preventDefault={submit}>
-	<BaseInput id="country" label="Country" type="text" bind:value={$store.country} required />
-	<BaseSelectMultiple
-		id="electionYear"
-		label="Campaign type and year (single select)"
-		options={[
-			{ id: '2', name: 'Communal election 2022' },
-			{ id: '3', name: 'Senate election 2022' },
-			{ id: '4', name: 'Presidential election 2023' },
-			{ id: '5', name: 'Chamber of Deputies election 2024' }
-		]}
+	<BaseSelect
+		id="country"
+		label="Country"
+		bind:value={$store.country}
 		required
-		placeholder="Search for the country's election campaign type and year"
-		bind:values={$store.typeOfElectionId}
+		disabled
+		options={[{ id: 'cz', name: 'Czech Republic' }]}
+	/>
+	<BaseSelect
+		id="electionType"
+		label="Election type"
+		options={electionTypes}
+		required
+		placeholder="Select the country's election type"
+		bind:value={$store.typeOfElectionId}
+	/>
+	<NumericalInput
+		id="electionYear"
+		label="Election year"
+		bind:value={$store.electionYear}
+		required
 	/>
 	<BaseSelectMultiple
 		id="politicalSubjects"
 		label="Political subjects (multiple, at least one required)"
-		options={politicalSubjects}
+		options={czechPoliticalSubjects}
 		required
-		placeholder="Search for Czech political subjects by its official name (2024/2/1)"
+		placeholder="Add subjects to selection by searching official name or abbreviation"
 		bind:values={$store.politicalSubjectIds}
 	/>
 	{#if $store.politicalSubjectIds.length > 1 || $store.coalitionName}
