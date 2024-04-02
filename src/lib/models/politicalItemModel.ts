@@ -61,7 +61,7 @@ export const getPoliticalItemsByFilter = async (
 	filter: PoliticalItemFilter,
 	lastVisible: QueryDocumentSnapshot<DocumentData> | null = null,
 	limit: number = 10
-): Promise<PoliticalItem[]> => {
+): Promise<{ items: PoliticalItem[]; lastVisible: QueryDocumentSnapshot<DocumentData> | null }> => {
 	const baseQuery = createBaseQuery(
 		db,
 		'political_items',
@@ -69,11 +69,7 @@ export const getPoliticalItemsByFilter = async (
 		...createBaseConstraintsFromFilter(filter)
 	);
 
-	console.log(baseQuery);
-
 	const querySnapshot = await executeQuery(baseQuery, lastVisible);
-
-	console.log(querySnapshot);
 	const items: PoliticalItem[] = [];
 
 	querySnapshot.items.forEach((item: DocumentData) => {
@@ -84,7 +80,7 @@ export const getPoliticalItemsByFilter = async (
 		}
 	});
 
-	return items;
+	return { items, lastVisible: querySnapshot.lastVisible };
 };
 
 const parseDbPoliticalItem = (item: DocumentData): PoliticalItem => {

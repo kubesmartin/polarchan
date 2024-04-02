@@ -8,6 +8,8 @@ export const saveItem = async (
 	files: File[],
 	uid: string
 ): Promise<string> => {
+	console.log('item', item);
+
 	// Initialize Firebase services
 	const storage = getStorage(app);
 	const firestore = getFirestore(app);

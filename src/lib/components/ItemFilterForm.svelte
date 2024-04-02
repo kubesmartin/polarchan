@@ -31,22 +31,52 @@
 <form on:submit|preventDefault={submit}>
 	<h2>Query Parameters</h2>
 	<div class="form-body">
-		<NumericalInput id="yearFrom" label="Year from" bind:value={filter.year.from} />
-		<NumericalInput id="yearTo" label="Year to" bind:value={filter.year.to} />
-		<BaseSelect
-			id="country"
-			label="Country"
-			value={'cz'}
-			options={[{ id: 'cz', name: 'Czech Republic' }]}
-			disabled
-		/>
-		<BaseSelect id="type" label="Type of material" bind:value={filter.type} options={typeOptions} />
+		<div class="group">
+			<NumericalInput id="yearFrom" label="Year from" bind:value={filter.year.from} />
+			<NumericalInput id="yearTo" label="Year to" bind:value={filter.year.to} />
+		</div>
+		<div class="group">
+			<BaseSelect
+				id="country"
+				label="Country"
+				value={'cz'}
+				options={[{ id: 'cz', name: 'Czech Republic' }]}
+				disabled
+			/>
+			<BaseSelect
+				id="type"
+				label="Type of material"
+				bind:value={filter.type}
+				options={typeOptions}
+			/>
+		</div>
+		<div class="group">
+			<BaseSelect
+				id="orderBy"
+				label="Order by"
+				bind:value={filter.order.by}
+				options={[
+					{ id: 'year', name: 'Year' },
+					{ id: 'added', name: 'Added' }
+				]}
+			/>
+			<BaseSelect
+				id="orderDirection"
+				label="Order direction"
+				bind:value={filter.order.direction}
+				options={[
+					{ id: 'asc', name: 'Ascending' },
+					{ id: 'desc', name: 'Descending' }
+				]}
+			/>
+		</div>
 		<BaseSelectMultiple
 			id="politicalSubjects"
 			label="Political subjects"
 			options={czechPoliticalSubjects}
 			placeholder="Add subjects to selection by searching official name or abbreviation"
 			bind:values={filter.politicalParty}
+			noSelectedSettings={{ message: 'All included', color: 'success' }}
 		/>
 		<BaseSelectMultiple
 			id="typeOfElection"
@@ -54,6 +84,7 @@
 			bind:values={filter.electionType}
 			placeholder="Add election types to selection"
 			options={electionTypes}
+			noSelectedSettings={{ message: 'All included', color: 'success' }}
 		/>
 	</div>
 	<SubmitButton>Filter</SubmitButton>
@@ -76,5 +107,10 @@
 	h2 {
 		margin: 0;
 		color: var(--c-brand);
+	}
+	.group {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
 	}
 </style>

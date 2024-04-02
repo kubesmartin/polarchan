@@ -10,6 +10,10 @@
 	export let disabled: boolean = false;
 	export let options: Array<{ id: string; name: string; abbreviation?: string }> = [];
 	export let isErrored: boolean = false;
+	export let noSelectedSettings: { message: string; color: 'warning' | 'success' } = {
+		message: 'None selected yet',
+		color: 'warning'
+	};
 
 	let filteredOptions = options;
 	let searchText = '';
@@ -72,7 +76,7 @@
 			</span>
 		{/each}
 		{#if (typeof values === 'string' && values === '') || (Array.isArray(values) && values.length === 0)}
-			<span class="chip warning">None selected yet</span>
+			<span class="chip {noSelectedSettings.color}">{noSelectedSettings.message}</span>
 		{/if}
 	</div>
 </label>
@@ -113,6 +117,10 @@
 	.chip.warning {
 		padding-right: 0.5rem;
 		background: var(--c-warning);
+	}
+	.chip.success {
+		padding-right: 0.5rem;
+		background: var(--c-success);
 	}
 	.autocomplete-input {
 		display: block;

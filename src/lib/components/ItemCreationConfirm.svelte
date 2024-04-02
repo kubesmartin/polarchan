@@ -16,6 +16,8 @@
 
 	let errorMessages: string[] = [];
 
+	const auth: IAuthService = getContext('auth');
+
 	const submit = async () => {
 		if (isUploading) return;
 		isUploading = true;
@@ -28,7 +30,6 @@
 		}
 
 		try {
-			const auth: IAuthService = getContext('auth');
 			const userStore = get(auth.store);
 			if (!userStore) {
 				throw new Error('You need to be logged in to upload an item');
