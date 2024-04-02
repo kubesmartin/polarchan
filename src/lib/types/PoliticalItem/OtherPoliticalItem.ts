@@ -1,4 +1,5 @@
 import type { PoliticalItem } from './PoliticalItem';
+import type { PoliticalItemFilter } from './PoliticalItemFilter';
 import { isString } from '../utility';
 
 export interface OtherPoliticalItem extends PoliticalItem {
@@ -15,3 +16,5 @@ export const isValidOtherPoliticalItem = (item: PoliticalItem): item is OtherPol
 	if (!isString((item as OtherPoliticalItem).additionalInformation)) return false;
 	return true;
 };
+
+export interface OtherPoliticalItemFilter extends PoliticalItemFilter {}

@@ -7,11 +7,10 @@ export const isString = (value: unknown): value is string => {
 };
 
 /**
- * Is the given date a valid date format (YYYY-MM-DD)
+ * Is the given date a valid date format number of (YYYY)
  * @param date date to check
- * @returns {boolean} is the date a valid date format (YYYY-MM-DD)
+ * @returns {boolean} is the date a valid date format (YYYY)
  */
 export const isValidDateFormat = (date: unknown): boolean => {
-	if (!isString(date)) return false;
-	return /^\d{4}-\d{2}-\d{2}$/.test(date);
+	return typeof date === 'number' && date.toString().length === 4;
 };

@@ -5,6 +5,9 @@
 	import SubmitButton from './SubmitButton.svelte';
 	// import sveltekit redirect
 	import { goto } from '$app/navigation';
+	import { getContext } from 'svelte';
+	import { get } from 'svelte/store';
+	import type { IAuthService } from '$lib/interfaces/IAuthService';
 
 	export let metaDataStore: Writable<PoliticalItemForm>;
 	export let filesStore: Writable<File[]>;
@@ -25,7 +28,12 @@
 		}
 
 		try {
-			const id = await saveItem(metaData, files);
+			const auth: IAuthService = getContext('auth');
+			const userStore = get(auth.store);
+			if (!userStore) {
+				throw new Error('You need to be logged in to upload an item');
+			}
+			const id = await saveItem(metaData, files, userStore.uid);
 			goto(`/item/${id}?uploaded=true`);
 		} catch (error) {
 			if (error instanceof Error) {
