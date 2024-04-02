@@ -18,10 +18,10 @@ export const getFilterFromUrl = (parametersInGet: URLSearchParams): PoliticalIte
 	const politicalPartyGet = parametersInGet.get('politicalParty');
 	const politicalParty = politicalPartyGet
 		? (politicalPartyGet.split(',') as PoliticalItem['politicalSubjectIds'])
-		: null;
+		: [];
 
 	const electionTypeGet = parametersInGet.get('electionType');
-	const electionType = electionTypeGet ? electionTypeGet.split(',') : null;
+	const electionType = electionTypeGet ? electionTypeGet.split(',') : [];
 
 	const orderDirectionGet = parametersInGet.get('orderDirection');
 	const orderDirectionIsValid = orderDirectionGet === 'asc' || orderDirectionGet === 'desc';
@@ -51,8 +51,9 @@ export const getFilterUrl = (filter: PoliticalItemFilter): URLSearchParams => {
 	if (filter.type) parameters.set('type', filter.type);
 	if (filter.year.from) parameters.set('yearFrom', filter.year.from.toString());
 	if (filter.year.to) parameters.set('yearTo', filter.year.to.toString());
-	if (filter.politicalParty) parameters.set('politicalParty', filter.politicalParty.join(','));
-	if (filter.electionType) parameters.set('electionType', filter.electionType.join(','));
+	if (filter.politicalParty.length > 0)
+		parameters.set('politicalParty', filter.politicalParty.join(','));
+	if (filter.electionType.length > 0) parameters.set('electionType', filter.electionType.join(','));
 	parameters.set('orderDirection', filter.order.direction);
 	parameters.set('orderBy', filter.order.by);
 

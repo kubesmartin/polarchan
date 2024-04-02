@@ -1,6 +1,6 @@
 <script lang="ts">
 	export let label: string;
-	export let value: number = 0;
+	export let value: number | null = 0;
 	export let id: string;
 	export let placeholder: string = '';
 	export let required: boolean = false;

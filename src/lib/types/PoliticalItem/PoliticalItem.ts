@@ -1,3 +1,4 @@
+import { politicalItemTypes } from '$lib/consts/politicalItemTypes';
 import { isObject, isString, isValidDateFormat } from '../utility';
 
 export interface PoliticalItem {
@@ -63,7 +64,7 @@ export const isValidPoliticalItem = (item: unknown): item is PoliticalItem => {
 };
 
 export const isValidPoliticalItemType = (type: unknown): type is PoliticalItem['type'] => {
-	return isString(type) && ['mass-printed', 'spot', 'other'].includes(type);
+	return isString(type) && politicalItemTypes.includes(type as PoliticalItem['type']);
 };
 
 export const isValidPoliticalSubjectIds = (

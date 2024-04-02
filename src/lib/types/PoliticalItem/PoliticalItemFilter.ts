@@ -22,13 +22,13 @@ export interface PoliticalItemFilter {
 	 * The political party to filter by
 	 * Array-contains query
 	 */
-	politicalParty: PoliticalItem['politicalSubjectIds'] | null;
+	politicalParty: PoliticalItem['politicalSubjectIds'];
 
 	/**
 	 * The election type to filter by
 	 * In query
 	 */
-	electionType: Array<PoliticalItem['typeOfElectionId']> | null;
+	electionType: Array<PoliticalItem['typeOfElectionId']>;
 
 	/**
 	 * Order by year or added date

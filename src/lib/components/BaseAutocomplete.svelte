@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { updateFilteredOptions } from '$lib/utils/filtering';
+
 	export let label: string;
 	export let values: string[] = [];
 	export let id: string;

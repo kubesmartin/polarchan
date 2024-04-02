@@ -41,13 +41,16 @@ export const getPoliticalItem = async (id: string) => {
 const createBaseConstraintsFromFilter = (filter: PoliticalItemFilter): QueryConstraint[] => {
 	const constraints: QueryConstraint[] = [];
 
-	if (filter.type !== null) constraints.push(withFilter('typeOfPoliticalItem', '==', filter.type));
+	if (filter.type !== null) constraints.push(withFilter('type', '==', filter.type));
 	if (filter.year.from) constraints.push(withFilter('year', '>=', filter.year.from));
 	if (filter.year.to) constraints.push(withFilter('year', '<', filter.year.to));
-	if (filter.politicalParty !== null) {
+	if (filter.politicalParty.length > 0) {
 		constraints.push(
 			withFilter('politicalSubjectIds', 'array-contains-any', filter.politicalParty)
 		);
+	}
+	if (filter.electionType.length > 0) {
+		constraints.push(withFilter('typeOfElectionId', 'in', filter.electionType));
 	}
 	constraints.push(withOrderBy(filter.order.by, filter.order.direction));
 
@@ -65,6 +68,8 @@ export const getPoliticalItemsByFilter = async (
 		withLimit(limit),
 		...createBaseConstraintsFromFilter(filter)
 	);
+
+	console.log(baseQuery);
 
 	const querySnapshot = await executeQuery(baseQuery, lastVisible);
 
