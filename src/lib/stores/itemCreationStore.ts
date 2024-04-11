@@ -9,7 +9,7 @@ export interface PoliticalItemForm {
 	electionYear: number | undefined;
 	politicalSubjectIds: string[];
 	coalitionName: string | undefined;
-	typeOfPoliticalItem: PoliticalItem['typeOfPoliticalItem'] | undefined;
+	typeOfPoliticalItem: PoliticalItem['type'] | undefined;
 	additionalInformation: string | undefined;
 }
 
