@@ -5,24 +5,11 @@
 			items: [
 				{
 					name: 'Browse items',
-					link: '/political-materials'
+					link: '/items'
 				},
 				{
 					name: 'Create item',
 					link: '/create-item'
-				}
-			]
-		},
-		{
-			groupName: 'Workspaces',
-			items: [
-				{
-					name: 'My workspaces',
-					link: '/workspaces'
-				},
-				{
-					name: 'Create',
-					link: '/workspaces/create'
 				}
 			]
 		}

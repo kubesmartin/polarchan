@@ -35,7 +35,7 @@
 				throw new Error('You need to be logged in to upload an item');
 			}
 			const id = await saveItem(metaData, files, userStore.uid);
-			goto(`/item/${id}?uploaded=true`);
+			goto(`/item?id=${id}&uploaded=true`);
 		} catch (error) {
 			if (error instanceof Error) {
 				errorMessages = [error.message];
