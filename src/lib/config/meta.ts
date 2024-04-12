@@ -116,6 +116,243 @@ export const fieldsInMeta: Fields = [
 		placeholder: 'Select type of political item'
 	},
 	{
+		id: 'massPrintedType',
+		type: 'select',
+		label: 'Type of mass-printed material',
+		options: [
+			{ id: 'poster', name: 'Poster' },
+			{ id: 'flyer', name: 'Flyer' },
+			{ id: 'brochure', name: 'Brochure' },
+			{ id: 'outdoor', name: 'Outdoor' },
+			{ id: 'other', name: 'Other' }
+		],
+		value: '',
+		required: true,
+		placeholder: 'Select type of mass-printed material',
+		case: (fields: Fields) => checkCondition(fields, 'type', (value) => value === 'mass-printed')
+	},
+	{
+		id: 'sentiment',
+		type: 'select',
+		label: 'Sentiment',
+		options: [
+			{ id: 'positive', name: 'Positive' },
+			{ id: 'negative', name: 'Negative' },
+			{ id: 'neutral', name: 'Neutral' },
+			{ id: 'other', name: 'Other / Hard to say' }
+		],
+		value: '',
+		required: true,
+		placeholder: 'Select sentiment',
+		case: (fields: Fields) =>
+			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+	},
+	{
+		id: 'campaignType',
+		type: 'select',
+		label: 'Campaign type',
+		options: [
+			{ id: 'product', name: 'Product campaign' },
+			{ id: 'negative', name: 'Negative campaign' },
+			{ id: 'comparison', name: 'Comparison campaign' },
+			{ id: 'image', name: 'Image campaign' },
+			{ id: 'other', name: 'Other / Hard to say' }
+		],
+		value: '',
+		required: true,
+		placeholder: 'Select campaign type',
+		case: (fields: Fields) =>
+			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+	},
+	{
+		id: 'mainMessage',
+		type: 'text',
+		label: 'Main message',
+		placeholder: 'Enter main message',
+		value: '',
+		required: false,
+		case: (fields: Fields) =>
+			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+	},
+	{
+		id: 'programmePriorities',
+		type: 'select-multiple',
+		label: 'Select programme priorities (can select multiple or leave empty if not applicable)',
+		placeholder: 'Select programme priorities (optional)',
+		options: [
+			{ id: 'economy', name: 'Economy' },
+			{ id: 'health', name: 'Health' },
+			{ id: 'education', name: 'Education' },
+			{ id: 'security', name: 'Security' },
+			{ id: 'foreign-affairs', name: 'Foreign affairs' },
+			{ id: 'social-affairs', name: 'Social affairs' },
+			{ id: 'environment', name: 'Environment' },
+			{ id: 'justice', name: 'Justice' },
+			{ id: 'other', name: 'Other' }
+		],
+		value: [],
+		required: false,
+		case: (fields: Fields) =>
+			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+	},
+	{
+		id: 'dominantColour',
+		type: 'select',
+		label: 'Dominant colour',
+		options: [
+			{ id: 'red', name: 'Red' },
+			{ id: 'blue', name: 'Blue' },
+			{ id: 'green', name: 'Green' },
+			{ id: 'yellow', name: 'Yellow' },
+			{ id: 'black', name: 'Black' },
+			{ id: 'white', name: 'White' },
+			{ id: 'mixed', name: 'Mixed' },
+			{ id: 'other', name: 'Other' }
+		],
+		value: '',
+		required: true,
+		placeholder: 'Select dominant colour',
+		case: (fields: Fields) => checkCondition(fields, 'type', (value) => value === 'mass-printed')
+	},
+	{
+		id: 'otherProminentColours',
+		type: 'select-multiple',
+		label: 'Select other prominent colours (can select multiple or leave empty if not applicable)',
+		placeholder: 'Select other prominent colours (optional)',
+		options: [
+			{ id: 'red', name: 'Red' },
+			{ id: 'blue', name: 'Blue' },
+			{ id: 'green', name: 'Green' },
+			{ id: 'yellow', name: 'Yellow' },
+			{ id: 'black', name: 'Black' },
+			{ id: 'white', name: 'White' },
+			{ id: 'mixed', name: 'Mixed' },
+			{ id: 'other', name: 'Other' }
+		],
+		value: [],
+		required: false,
+		case: (fields: Fields) => checkCondition(fields, 'type', (value) => value === 'mass-printed')
+	},
+	{
+		id: 'faceCount',
+		type: 'number',
+		label: 'How many faces are on the material?',
+		placeholder: 'Enter number of faces',
+		value: 0,
+		required: true,
+		case: (fields: Fields) => checkCondition(fields, 'type', (value) => value === 'mass-printed')
+	},
+	{
+		id: 'hasFaceOfCandidate',
+		type: 'select',
+		label: 'Does the material contain a face of a candidate?',
+		options: [
+			{ id: 'yes', name: 'Yes' },
+			{ id: 'no', name: 'No' }
+		],
+		value: '',
+		required: false,
+		placeholder: 'Select an option',
+		case: (fields: Fields) => checkCondition(fields, 'faceCount', (value) => Number(value) > 0)
+	},
+	{
+		id: 'hasFaceOfLeader',
+		type: 'select',
+		label: 'Does the material contain a face of a party/coalition leader?',
+		options: [
+			{ id: 'yes', name: 'Yes' },
+			{ id: 'no', name: 'No' }
+		],
+		value: '',
+		required: false,
+		placeholder: 'Select an option',
+		case: (fields: Fields) => checkCondition(fields, 'faceCount', (value) => Number(value) > 0)
+	},
+	{
+		id: 'genderRepresentation',
+		type: 'select',
+		label: 'What is the gender representation on the material?',
+		options: [
+			{ id: 'male', name: 'All male' },
+			{ id: 'male-mostly', name: 'Mostly male' },
+			{ id: 'equal', name: 'Equal' },
+			{ id: 'female-mostly', name: 'Mostly female' },
+			{ id: 'female', name: 'All female' },
+			{ id: 'other', name: 'Other' }
+		],
+		value: '',
+		required: false,
+		placeholder: 'Select an option',
+		case: (fields: Fields) => checkCondition(fields, 'faceCount', (value) => Number(value) > 0)
+	},
+	{
+		id: 'hasNationalSymbols',
+		type: 'select',
+		label: 'Does the material contain national symbols?',
+		options: [
+			{ id: 'yes', name: 'Yes' },
+			{ id: 'no', name: 'No' }
+		],
+		value: '',
+		required: false,
+		placeholder: 'Select an option',
+		case: (fields: Fields) =>
+			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+	},
+	{
+		id: 'hasClientContractorInfo',
+		type: 'select',
+		label: 'Does the material contain client/contractor information?',
+		options: [
+			{ id: 'yes-yes', name: 'Yes, client and contractor' },
+			{ id: 'yes-no', name: 'Only client' },
+			{ id: 'no-yes', name: 'Only contractor' },
+			{ id: 'no-no', name: 'No' }
+		],
+		value: '',
+		required: false,
+		placeholder: 'Select an option',
+		case: (fields: Fields) =>
+			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+	},
+	{
+		id: 'contractor',
+		type: 'text',
+		label: 'Contractor',
+		placeholder: 'Enter contractor',
+		value: '',
+		required: false,
+		case: (fields: Fields) =>
+			checkCondition(
+				fields,
+				'hasClientContractorInfo',
+				(value) => value === 'no-yes' || value === 'yes-yes'
+			)
+	},
+	{
+		id: 'client',
+		type: 'text',
+		label: 'Client',
+		placeholder: 'Enter client',
+		value: '',
+		required: false,
+		case: (fields: Fields) =>
+			checkCondition(
+				fields,
+				'hasClientContractorInfo',
+				(value) => value === 'yes-no' || value === 'yes-yes'
+			)
+	},
+	{
+		id: 'scanningDevice',
+		type: 'text',
+		label: 'Scanning device',
+		placeholder: 'Enter scanning device',
+		value: '',
+		required: false,
+		case: (fields: Fields) => checkCondition(fields, 'type', (value) => value === 'mass-printed')
+	},
+	{
 		id: 'additionalInformation',
 		type: 'text',
 		label: 'Additional information',
