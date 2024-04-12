@@ -3,11 +3,17 @@
 	import LayoutRestricted from '$lib/components/LayoutRestricted.svelte';
 	import { getFilterFromUrl } from '$lib/services/filterGetParamService';
 	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
+	import Loader from '$lib/components/Loader.svelte';
 
-	$: filter = getFilterFromUrl($page.url.searchParams);
+	$: filter = browser && getFilterFromUrl($page.url.searchParams);
 	export let title = 'Browse items';
 </script>
 
 <LayoutRestricted {title}>
-	<ItemFilter {filter} />
+	{#if filter}
+		<ItemFilter {filter} />
+	{:else}
+		<Loader />
+	{/if}
 </LayoutRestricted>
