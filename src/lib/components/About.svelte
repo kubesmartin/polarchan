@@ -7,14 +7,16 @@
 		<h2>PolARCHAN brings political advertisement to researchers and students alike</h2>
 		<div class="columns">
 			<p>
-				Phasellus rhoncus. In enim a arcu imperdiet malesuada. Phasellus et lorem id felis nonummy
-				placerat. Donec vitae arcu. Mauris dolor felis, sagittis at, luctus sed, aliquam non,
-				tellus. Aenean placerat. Free and opensource.
+				From the evaluation of political posters and the first efforts to professionalize the
+				evaluation of campaign publications to today's strongly interdisciplinary approach combining
+				political science, media studies and behavioral studies - visuality plays a significant role
+				in persuasive communication and political campaigns.
 			</p>
 			<p>
-				Phasellus rhoncus. In enim a arcu imperdiet malesuada. Phasellus et lorem id felis nonummy
-				placerat. Donec vitae arcu. Mauris dolor felis, sagittis at, luctus sed, aliquam non,
-				tellus. Aenean placerat. Free and opensource.
+				PolARCHAN is a free open-source tool that opens up new possibilities for analyzing the
+				visuality of political materials. It is available to university students and researchers as
+				well as professionals. Browse different political materials or sign up and analyse them
+				based on your set of criteria by political subject, eletion type, date and many more!
 			</p>
 		</div>
 	</WidthHolder>
