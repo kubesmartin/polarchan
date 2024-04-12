@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let isDisabled = false;
+	export let type: 'button' | 'submit' = 'button';
 </script>
 
-<button type="submit" disabled={isDisabled}>
+<button {type} disabled={isDisabled} on:click>
 	<slot />
 </button>
 

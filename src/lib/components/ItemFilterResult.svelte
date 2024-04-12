@@ -6,6 +6,7 @@
 	import { writable } from 'svelte/store';
 	import type { PoliticalItem } from '$lib/types/PoliticalItem/PoliticalItem';
 	import type { Writable } from 'svelte/store';
+	import ButtonBase from './ButtonBase.svelte';
 
 	export let filter: PoliticalItemFilter;
 	let previousFilter = JSON.stringify(filter); // Store the previous filter for comparison
@@ -53,7 +54,7 @@
 					<ItemPreview {politicalItem} />
 				{/each}
 			</ul>
-			<button on:click={fetchItems}>Load more</button>
+			<ButtonBase on:click={fetchItems}>Load more</ButtonBase>
 		{:else}
 			<p>No items found</p>
 		{/if}

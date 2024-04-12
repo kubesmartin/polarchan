@@ -1,28 +1,19 @@
 <script lang="ts">
-	import SubmitButton from './SubmitButton.svelte';
-
+	import ButtonBase from './ButtonBase.svelte';
 	import BaseInput from './BaseInput.svelte';
-
 	import { sendPasswordResetEmail } from 'firebase/auth';
-
 	import { auth } from '$lib/firebase';
-
 	import ErrorMessage from './ErrorMessage.svelte';
-
 	import PolarchanLogo from './PolarchanLogo.svelte';
 
 	let email = '';
-
 	let error = '';
-
 	let isErrored = false;
-
 	let isReset = false;
 
 	const resetPassword = async () => {
 		try {
 			await sendPasswordResetEmail(auth, email);
-
 			isReset = true;
 		} catch (e) {
 			if (e instanceof Error) {
@@ -30,7 +21,6 @@
 			} else {
 				error = 'An unknown error occurred';
 			}
-
 			isErrored = true;
 		}
 	};
@@ -71,7 +61,7 @@
 		</p>
 	</div>
 
-	<SubmitButton isDisabled={isReset}>Reset Password</SubmitButton>
+	<ButtonBase isDisabled={isReset}>Reset Password</ButtonBase>
 </form>
 
 <style>

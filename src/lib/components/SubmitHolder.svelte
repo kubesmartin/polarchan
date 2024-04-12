@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ErrorMessage from './ErrorMessage.svelte';
-	import SubmitButton from './SubmitButton.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 	export let errors: string[] = [];
 </script>
 
@@ -11,7 +11,7 @@
 		{/each}
 	</div>
 	<div class="submit-holder__button">
-		<SubmitButton>Next step</SubmitButton>
+		<ButtonBase>Next step</ButtonBase>
 	</div>
 </div>
 

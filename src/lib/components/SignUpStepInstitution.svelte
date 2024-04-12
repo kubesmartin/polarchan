@@ -2,7 +2,7 @@
 	import type { SignUpInstituionInfoFormType } from '$lib/stores/personalInfoStore';
 	import type { Writable } from 'svelte/store';
 	import BaseInput from './BaseInput.svelte';
-	import SubmitButton from './SubmitButton.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
@@ -33,7 +33,7 @@
 	<div class="submit-holder">
 		<div class="error-holder"></div>
 		<div class="submit-holder__button">
-			<SubmitButton>Next step</SubmitButton>
+			<ButtonBase>Next step</ButtonBase>
 		</div>
 	</div>
 </form>

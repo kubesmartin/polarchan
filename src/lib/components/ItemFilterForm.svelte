@@ -8,7 +8,7 @@
 	import { czechPoliticalSubjects } from '$lib/consts/czechPoliticalSubjects';
 	import { politicalItemTypes } from '$lib/consts/politicalItemTypes';
 	import { electionTypes } from '$lib/consts/electionTypes';
-	import SubmitButton from './SubmitButton.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 
 	export let filter: PoliticalItemFilter;
 
@@ -87,7 +87,7 @@
 			noSelectedSettings={{ message: 'All included', color: 'success' }}
 		/>
 	</div>
-	<SubmitButton>Filter</SubmitButton>
+	<ButtonBase>Filter</ButtonBase>
 </form>
 
 <style>

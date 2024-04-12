@@ -2,7 +2,7 @@
 	import type { PoliticalItemForm } from '$lib/stores/itemCreationStore';
 	import { saveItem } from '$lib/utils/saveItem';
 	import type { Writable } from 'svelte/store';
-	import SubmitButton from './SubmitButton.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 	// import sveltekit redirect
 	import { goto } from '$app/navigation';
 	import { getContext } from 'svelte';
@@ -67,7 +67,7 @@
 	{#if isUploading}
 		<p>Uploading...</p>
 	{:else}
-		<SubmitButton>Confirm and upload</SubmitButton>
+		<ButtonBase>Confirm and upload</ButtonBase>
 	{/if}
 </form>
 

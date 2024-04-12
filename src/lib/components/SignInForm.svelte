@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SubmitButton from './SubmitButton.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 	import BaseInput from './BaseInput.svelte';
 	import PolarchanLogo from './PolarchanLogo.svelte';
 	import ErrorMessage from './ErrorMessage.svelte';
@@ -78,7 +78,7 @@
 			<a href="/">Back to homepage</a>
 		</p>
 	</div>
-	<SubmitButton>Sign in</SubmitButton>
+	<ButtonBase>Sign in</ButtonBase>
 </form>
 
 <style>

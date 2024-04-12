@@ -3,8 +3,8 @@
 	import type { SignUpPersonalInfoFormType } from '$lib/stores/personalInfoStore';
 	import type { SignUpInstituionInfoFormType } from '$lib/stores/personalInfoStore';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
-	import Button from './Button.svelte';
-	import SubmitButton from './SubmitButton.svelte';
+	import Button from './ButtonLink.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 	import { getContext } from 'svelte';
 	import type { IUserMetaInfo } from '$lib/interfaces/IUserMetaInfo';
 
@@ -83,7 +83,7 @@
 			<li><a href="/terms">Terms of service</a></li>
 			<li><a href="/privacy">Privacy policy</a></li>
 		</ul>
-		<SubmitButton on:click={() => (isAllConfirmed = true)}>I agree, register me</SubmitButton>
+		<ButtonBase on:click={() => (isAllConfirmed = true)}>I agree, register me</ButtonBase>
 	</form>
 {/if}
 

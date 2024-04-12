@@ -1,6 +1,6 @@
 <script lang="ts">
 	import WidthHolder from '$lib/components/WidthHolder.svelte';
-	import Button from './Button.svelte';
+	import ButtonLink from './ButtonLink.svelte';
 	import Navbar from './Navbar.svelte';
 	import Quote from './Quote.svelte';
 </script>
@@ -12,7 +12,7 @@
 			<div class="holder">
 				<div>
 					<h1>Archive, browse and analyse political advertisement.</h1>
-					<Button href="/items">Start browsing</Button>
+					<ButtonLink href="/items">Start browsing</ButtonLink>
 				</div>
 				<div class="quote-holder">
 					<Quote

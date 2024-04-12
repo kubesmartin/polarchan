@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Writable } from 'svelte/store';
 	import { createEventDispatcher } from 'svelte';
-	import SubmitButton from './SubmitButton.svelte';
+	import ButtonBase from './ButtonBase.svelte';
 
 	export let store: Writable<File[]>;
 	let blockSubmit = false;
@@ -80,7 +80,7 @@
 		</div>
 	</div>
 	<div class="submit-button-container">
-		<SubmitButton isDisabled={$store.length === 0}>Next step</SubmitButton>
+		<ButtonBase isDisabled={$store.length === 0}>Next step</ButtonBase>
 	</div>
 </form>
 
