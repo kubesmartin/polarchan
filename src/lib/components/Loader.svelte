@@ -1,55 +1,30 @@
 <div class="wrap">
 	<div class="loader"></div>
+	<p>Loading...</p>
 </div>
 
 <style>
 	.wrap {
 		display: flex;
-		justify-content: center;
+		justify-content: left;
 		align-items: center;
 		box-sizing: border-box;
 		width: 100%;
-		padding: 20px;
-		background: var(--c-brand);
+		padding: 15px;
+		gap: 20px;
+		padding-inline: 0;
 	}
 	.loader {
-		width: fit-content;
-		font-weight: bold;
-		font-family: monospace;
-		font-size: 30px;
-		overflow: hidden;
+		width: 30px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		border: 8px solid;
+		border-color: var(--c-brand) transparent var(--c-brand) transparent;
+		animation: l1 1s infinite;
 	}
-	.loader::before {
-		content: 'Loading...';
-		color: var(--c-white);
-		text-shadow:
-			0 0 0 var(--c-white),
-			10ch 0 0 var(--c-brand),
-			20ch 0 0 var(--c-white);
-		background: linear-gradient(
-				90deg,
-				var(--c-white) 0 calc(100% / 3),
-				var(--c-white) 0 calc(2 * 100% / 3),
-				var(--c-white) 0 0
-			)
-			left/300% 100%;
-		animation: l23 2s infinite;
-	}
-
-	@keyframes l23 {
-		50% {
-			background-position: center;
-			text-shadow:
-				-10ch 0 0 var(--c-white),
-				0 0 0 var(--c-brand),
-				10ch 0 0 var(--c-white);
-		}
-		100% {
-			background-position: right;
-			text-shadow:
-				-20ch 0 0 var(--c-white),
-				-10ch 0 0 var(--c-brand),
-				0 0 0 var(--c-white);
+	@keyframes l1 {
+		to {
+			transform: rotate(0.5turn);
 		}
 	}
 </style>

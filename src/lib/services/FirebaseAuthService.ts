@@ -14,16 +14,17 @@ import { writable, type Writable } from 'svelte/store';
 import type { IUserMetaInfo } from '$lib/interfaces/IUserMetaInfo';
 
 export class FirebaseAuthService implements IAuthService {
-	store: Writable<{ email: string; uid: string; displayName: string } | null> = writable(null);
+	store: Writable<{ email: string; uid: string; displayName: string } | null | false> =
+		writable(null);
 
 	constructor() {
 		onAuthStateChanged(auth, (user) => {
-			if (!user) return this.store.set(null);
+			if (!user) return this.store.set(false);
 			const { email, uid, displayName } = user;
 			if (email && uid && displayName) {
 				this.store.set({ email, uid, displayName });
 			} else {
-				this.store.set(null);
+				this.store.set(false);
 			}
 		});
 	}
@@ -45,7 +46,7 @@ export class FirebaseAuthService implements IAuthService {
 
 	async logout(): Promise<void> {
 		await signOut(auth);
-		this.store.set(null);
+		this.store.set(false);
 	}
 
 	async register(email: string, password: string, meta: IUserMetaInfo): Promise<void> {
