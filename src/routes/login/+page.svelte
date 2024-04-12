@@ -2,6 +2,11 @@
 	import SignInForm from '$lib/components/SignInForm.svelte';
 </script>
 
+<svelte:head>
+	<title>PolARCHAN: Login</title>
+	<meta name="description" content="Log in to the PolARCHAN system" />
+</svelte:head>
+
 <div class="background">
 	<img src="bg_login.jpg" alt="" />
 	<div></div>
