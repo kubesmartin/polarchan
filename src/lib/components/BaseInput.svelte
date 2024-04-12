@@ -46,6 +46,10 @@
 		color: var(--c-black);
 		box-sizing: border-box;
 	}
+	input:disabled {
+		color: var(--c-accent-black);
+		cursor: not-allowed;
+	}
 	.isErrored {
 		color: var(--c-error);
 	}

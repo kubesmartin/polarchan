@@ -1,4 +1,8 @@
-<button type="submit">
+<script lang="ts">
+	export let disabled = false;
+</script>
+
+<button type="submit" {disabled}>
 	<slot />
 </button>
 
@@ -19,6 +23,11 @@
 		&:hover {
 			color: var(--c-accent-brand);
 			border-color: var(--c-accent-brand);
+		}
+		&:disabled {
+			color: var(--c-accent-black);
+			border-color: var(--c-accent-black);
+			cursor: not-allowed;
 		}
 	}
 </style>

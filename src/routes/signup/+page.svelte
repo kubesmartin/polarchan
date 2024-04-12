@@ -9,6 +9,11 @@
 	export let title = 'Registration to PolARCHAN system';
 </script>
 
+<svelte:head>
+	<title>PolARCHAN: {title}</title>
+	<meta name="description" content="Register to PolARCHAN system" />
+</svelte:head>
+
 <BorderWrap>
 	<div class="holder">
 		<WidthHolder>
