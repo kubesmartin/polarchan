@@ -1,11 +1,10 @@
 <script lang="ts">
 	export let label: string;
-	export let value: string = '';
+	export let value: number | null = 0;
 	export let id: string;
 	export let placeholder: string = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-	export let type: 'text' | 'email' | 'password' | 'date' = 'text';
 	export let isErrored: boolean = false;
 </script>
 
@@ -18,15 +17,7 @@
 			<span> * </span>
 		{/if}
 	</span>
-	{#if type === 'text'}
-		<input type="text" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{:else if type === 'email'}
-		<input type="email" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{:else if type === 'password'}
-		<input type="password" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{:else if type === 'date'}
-		<input type="date" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{/if}
+	<input type="number" {id} bind:value on:input {placeholder} {required} {disabled} />
 </label>
 
 <style>

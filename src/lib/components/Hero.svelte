@@ -12,13 +12,13 @@
 			<div class="holder">
 				<div>
 					<h1>Archive, browse and analyse political advertisement.</h1>
-					<Button href="/">Start browsing</Button>
+					<Button href="/items">Start browsing</Button>
 				</div>
 				<div class="quote-holder">
 					<Quote
-						>Phasellus rhoncus. In enim a arcu imperdiet malesuada. Phasellus et lorem id felis
-						nonummy placerat. Donec vitae arcu. Mauris dolor felis, sagittis at, luctus sed, aliquam
-						non, tellus. Aenean placerat. Free and opensource.</Quote
+						>PolARCHAN unlocks new ways of analysing political materials and their visual aspects.
+						Discover visuals from political parties, digitized on one simple platform, with
+						pre-defined and standardized attributes, that make them ready for research.</Quote
 					>
 				</div>
 			</div>

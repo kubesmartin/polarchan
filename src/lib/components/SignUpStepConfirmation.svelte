@@ -2,18 +2,16 @@
 	import type { Writable } from 'svelte/store';
 	import type { SignUpPersonalInfoFormType } from '$lib/stores/personalInfoStore';
 	import type { SignUpInstituionInfoFormType } from '$lib/stores/personalInfoStore';
-	import {
-		createUserWithEmailAndPassword,
-		updateProfile,
-		sendEmailVerification
-	} from 'firebase/auth';
-	import { doc, setDoc } from 'firebase/firestore';
-	import { auth, db } from '$lib/firebase';
+	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import Button from './Button.svelte';
 	import SubmitButton from './SubmitButton.svelte';
+	import { getContext } from 'svelte';
+	import type { IUserMetaInfo } from '$lib/interfaces/IUserMetaInfo';
 
 	export let personalStore: Writable<SignUpPersonalInfoFormType>;
 	export let institutionStore: Writable<SignUpInstituionInfoFormType>;
+
+	const auth: IAuthService = getContext('auth');
 
 	let isAllConfirmed = false;
 
@@ -37,23 +35,17 @@
 		)
 			throw new Error('Some mandatory fields are empty');
 
-		const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-		await updateProfile(userCredential.user, {
-			displayName: `${firstName} ${lastName}`
-		});
-
-		await setDoc(doc(db, 'users', userCredential.user.uid), {
-			firstName,
-			lastName,
+		const metadata: IUserMetaInfo = {
+			titlesAfter,
+			titlesBefore,
 			institutionName,
 			primaryDepartment,
 			status,
-			titlesAfter,
-			titlesBefore
-		});
+			firstName,
+			lastName
+		};
 
-		await sendEmailVerification(userCredential.user);
+		await auth.register(email, password, metadata);
 	};
 </script>
 

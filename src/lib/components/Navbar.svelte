@@ -2,6 +2,7 @@
 	import WidthHolder from './WidthHolder.svelte';
 	import NavItem from './NavItem.svelte';
 	import PolarchanLogo from './PolarchanLogo.svelte';
+	import UserIndicator from './UserIndicator.svelte';
 
 	const menuItems = [
 		{
@@ -11,11 +12,6 @@
 		{
 			label: 'Browse',
 			href: '/'
-		},
-		{
-			label: 'Register',
-			href: '/',
-			isHighlighted: true
 		}
 	];
 </script>
@@ -26,8 +22,9 @@
 			<PolarchanLogo />
 			<nav>
 				{#each menuItems as item}
-					<NavItem href={item.href} label={item.label} isHighlighted={item.isHighlighted} />
+					<NavItem href={item.href} label={item.label} />
 				{/each}
+				<UserIndicator />
 			</nav>
 		</div>
 	</WidthHolder>
@@ -43,5 +40,8 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 1.8rem;
+	}
+	nav {
+		display: flex;
 	}
 </style>

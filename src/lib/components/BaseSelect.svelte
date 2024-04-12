@@ -1,11 +1,11 @@
 <script lang="ts">
 	export let label: string;
-	export let value: string = '';
+	export let value: string | null = '';
 	export let id: string;
 	export let placeholder: string = '';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
-	export let type: 'text' | 'email' | 'password' | 'date' = 'text';
+	export let options: Array<{ id: string | null; name: string }> = []; // Assuming options is an array of objects with value and text
 	export let isErrored: boolean = false;
 </script>
 
@@ -18,15 +18,12 @@
 			<span> * </span>
 		{/if}
 	</span>
-	{#if type === 'text'}
-		<input type="text" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{:else if type === 'email'}
-		<input type="email" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{:else if type === 'password'}
-		<input type="password" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{:else if type === 'date'}
-		<input type="date" {id} bind:value on:input {placeholder} {required} {disabled} />
-	{/if}
+	<select {id} bind:value {required} {disabled}>
+		<option value="" disabled>{placeholder}</option>
+		{#each options as option}
+			<option value={option.id} selected={option.id === value}>{option.name}</option>
+		{/each}
+	</select>
 </label>
 
 <style>
@@ -38,7 +35,7 @@
 		padding-inline: 0.5rem;
 		font-size: 0.8rem;
 	}
-	input {
+	select {
 		display: block;
 		width: 100%;
 		padding: 0.5rem;
@@ -51,7 +48,7 @@
 	.isErrored {
 		color: var(--c-error);
 	}
-	.isErrored input {
+	.isErrored select {
 		border-color: var(--c-error);
 	}
 </style>

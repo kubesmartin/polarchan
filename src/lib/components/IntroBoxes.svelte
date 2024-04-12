@@ -8,16 +8,16 @@
 		<div class="columns">
 			<Box title="Archive of political advertisement">
 				<p>
-					Phasellus rhoncus. In enim a arcu imperdiet malesuada. Phasellus et lorem id felis nonummy
-					placerat. Donec vitae arcu. Mauris dolor felis, sagittis at, luctus sed, aliquam non,
-					tellus. Aenean placerat.
+					PolARCHAN stores products of political marketing. From posters and leaflets to videospots,
+					it archives materials produced during political campaigns by different political subjects
+					from different countries.
 				</p>
 			</Box>
 			<Box title="Tool for political communication research">
 				<p>
-					Phasellus rhoncus. In enim a arcu imperdiet malesuada. Phasellus et lorem id felis nonummy
-					placerat. Donec vitae arcu. Mauris dolor felis, sagittis at, luctus sed, aliquam non,
-					tellus. Aenean placerat.
+					Are you a researcher in field of political communication, political marketing, visual
+					politics or related field? PolARCHAN allows you to browse and analyse archived material in
+					it's administration centre!
 				</p>
 			</Box>
 		</div>
