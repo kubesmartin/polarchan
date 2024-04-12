@@ -29,7 +29,7 @@
 						<Loader />
 					{:else if $user === false}
 						<p>You are not logged in. Please sign in to access this page.</p>
-						<ButtonLink href="/sign-in">Sign in</ButtonLink>
+						<ButtonLink href="/login">Log in</ButtonLink>
 					{:else}
 						<slot />
 					{/if}
