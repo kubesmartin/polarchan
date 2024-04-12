@@ -87,7 +87,7 @@
 			noSelectedSettings={{ message: 'All included', color: 'success' }}
 		/>
 	</div>
-	<ButtonBase>Filter</ButtonBase>
+	<ButtonBase type="submit">Filter</ButtonBase>
 </form>
 
 <style>

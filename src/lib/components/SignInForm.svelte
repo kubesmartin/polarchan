@@ -16,6 +16,8 @@
 	const store = auth.store;
 
 	const login = async () => {
+		console.log('login');
+		console.log(email, password, auth);
 		try {
 			await auth.login(email, password);
 			if ($store) {
@@ -78,7 +80,7 @@
 			<a href="/">Back to homepage</a>
 		</p>
 	</div>
-	<ButtonBase>Sign in</ButtonBase>
+	<ButtonBase type="submit">Sign in</ButtonBase>
 </form>
 
 <style>

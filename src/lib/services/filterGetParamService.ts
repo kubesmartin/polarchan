@@ -15,7 +15,7 @@ export const getFilterFromUrl = (parametersInGet: URLSearchParams): PoliticalIte
 		to: yearTo ? parseInt(yearTo) : null
 	};
 
-	const politicalPartyGet = parametersInGet.get('politicalParty');
+	const politicalPartyGet = parametersInGet.get('politicalSubjectIds');
 	const politicalParty = politicalPartyGet
 		? (politicalPartyGet.split(',') as PoliticalItem['politicalSubjectIds'])
 		: [];
@@ -52,7 +52,7 @@ export const getFilterUrl = (filter: PoliticalItemFilter): URLSearchParams => {
 	if (filter.year.from) parameters.set('yearFrom', filter.year.from.toString());
 	if (filter.year.to) parameters.set('yearTo', filter.year.to.toString());
 	if (filter.politicalParty.length > 0)
-		parameters.set('politicalParty', filter.politicalParty.join(','));
+		parameters.set('politicalSubjects', filter.politicalParty.join(','));
 	if (filter.electionType.length > 0) parameters.set('electionType', filter.electionType.join(','));
 	parameters.set('orderDirection', filter.order.direction);
 	parameters.set('orderBy', filter.order.by);

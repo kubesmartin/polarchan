@@ -80,7 +80,7 @@
 		</div>
 	</div>
 	<div class="submit-button-container">
-		<ButtonBase isDisabled={$store.length === 0}>Next step</ButtonBase>
+		<ButtonBase type="submit" isDisabled={$store.length === 0}>Next step</ButtonBase>
 	</div>
 </form>
 
