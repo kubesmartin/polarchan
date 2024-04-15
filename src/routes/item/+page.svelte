@@ -1,18 +1,27 @@
 <script lang="ts">
-	import ItemFilter from '$lib/components/ItemFilter.svelte';
 	import LayoutRestricted from '$lib/components/LayoutRestricted.svelte';
-	import { getFilterFromUrl } from '$lib/services/filterGetParamService';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Loader from '$lib/components/Loader.svelte';
+	import { getPoliticalItem } from '$lib/models/politicalItemModel';
+	import ItemView from '$lib/components/ItemView.svelte';
 
-	$: filter = browser && getFilterFromUrl($page.url.searchParams);
-	export let title = 'Browse items';
+	$: id = browser && $page.url.searchParams.get('id');
+	export let title = 'Item detail';
+
+	$: itemPromise = typeof id === 'string' ? getPoliticalItem(id) : null;
 </script>
 
 <LayoutRestricted {title}>
-	{#if filter}
-		<ItemFilter {filter} />
+	{#if itemPromise !== null}
+		{#await itemPromise}
+			{id}
+			<Loader />
+		{:then item}
+			<ItemView {item} />
+		{:catch error}
+			<p>{error.message}</p>
+		{/await}
 	{:else}
 		<Loader />
 	{/if}

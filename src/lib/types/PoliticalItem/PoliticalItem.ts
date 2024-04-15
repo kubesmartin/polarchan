@@ -1,7 +1,7 @@
 import { politicalItemTypes } from '$lib/consts/politicalItemTypes';
 import { isObject, isString, isValidDateFormat } from '../utility';
 
-export interface PoliticalItem {
+export type PoliticalItemBase = {
 	/**
 	 * Identifier of the subject
 	 * @type {string} unique identifier
@@ -49,7 +49,10 @@ export interface PoliticalItem {
 	uid: string;
 
 	files: string[];
-}
+};
+
+// now indicate it can have other unknown properties
+export type PoliticalItem = PoliticalItemBase & Record<string, string | string[] | number>;
 
 export const isValidPoliticalItem = (item: unknown): item is PoliticalItem => {
 	if (!isObject(item)) throw new Error('Not an object');

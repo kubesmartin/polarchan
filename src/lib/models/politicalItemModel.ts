@@ -6,7 +6,13 @@ import {
 	executeQuery
 } from '$lib/services/firestoreServices';
 import { db } from '$lib/firebase';
-import type { QueryDocumentSnapshot, DocumentData, QueryConstraint } from 'firebase/firestore';
+import {
+	type QueryDocumentSnapshot,
+	type DocumentData,
+	type QueryConstraint,
+	getDoc,
+	doc
+} from 'firebase/firestore';
 import { isValidPoliticalItem, type PoliticalItem } from '$lib/types/PoliticalItem/PoliticalItem';
 import { type PoliticalItemFilter } from '$lib/types/PoliticalItem/PoliticalItemFilter';
 
@@ -33,9 +39,16 @@ export const getPoliticalItems = async (
  * Gets a single political item from the database.
  * @param id - The id of the political item to retrieve.
  */
-export const getPoliticalItem = async (id: string) => {
-	const baseQuery = createBaseQuery(db, 'political_items', withFilter('id', '==', id));
-	return executeQuery(baseQuery);
+export const getPoliticalItem = async (id: string): Promise<PoliticalItem> => {
+	console.log(id, 'id in getPoliticalItem');
+	// directly access document by id (no need to query)
+	const docRef = doc(db, 'political_items', id);
+	const docSnap = await getDoc(docRef);
+	if (!docSnap.exists()) {
+		throw new Error('No such document!');
+	}
+	const item = { ...docSnap.data(), id };
+	return parseDbPoliticalItem(item);
 };
 
 const createBaseConstraintsFromFilter = (filter: PoliticalItemFilter): QueryConstraint[] => {

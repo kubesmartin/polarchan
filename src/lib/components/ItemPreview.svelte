@@ -28,7 +28,13 @@
 	const politicalSubjectIds = politicalItem.politicalSubjectIds;
 
 	const politicalSubjects = politicalSubjectIds.map((id) => {
-		return czechPoliticalSubjects.find((subject) => subject.id === id);
+		const foundSubject = czechPoliticalSubjects.find((subject) => subject.id === id);
+		if (foundSubject !== undefined) {
+			return foundSubject;
+		} else {
+			console.error(`Political subject with id ${id} not found`);
+			return { id: '', name: 'Not found', abbreviation: 'Not found', type: 'NF' };
+		}
 	});
 
 	/** Transfer mass-printed to Mass Printed etc. */
@@ -45,7 +51,7 @@
 	<img src={srcOfThumbnail} alt="item image" />
 	<h3>{title}</h3>
 	<p>{materialType}, {politicalItem.year}</p>
-	<a href="/items/{politicalItem.id}">More info</a>
+	<a href="/item?id={politicalItem.id}">More info</a>
 </div>
 
 <style>
