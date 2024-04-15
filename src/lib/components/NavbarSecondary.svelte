@@ -9,7 +9,50 @@
 				},
 				{
 					name: 'Create item',
-					link: '/create-item'
+					link: '/items/create'
+				}
+			]
+		},
+		{
+			groupName: 'Queries',
+			items: [
+				{
+					name: 'My saved queries: Browse, edit or export to CSV',
+					link: '/queries'
+				}
+			]
+		},
+		{
+			groupName: 'Account',
+			items: [
+				{
+					name: 'Dashboard',
+					link: '/dashboard'
+				},
+				{
+					name: 'Settings',
+					link: '/settings'
+				},
+				{
+					name: 'Log out',
+					link: '/logout'
+				}
+			]
+		},
+		{
+			groupName: 'Other',
+			items: [
+				{
+					name: 'GDPR',
+					link: '/gdpr'
+				},
+				{
+					name: 'Terms of service',
+					link: '/terms'
+				},
+				{
+					name: 'Source code',
+					link: '/source'
 				}
 			]
 		}
@@ -59,10 +102,16 @@
 	.secondary-menu__group li {
 		margin: 0;
 		padding: 0;
+		max-width: 225px;
+		margin-bottom: 0.5rem;
+		line-height: 1.15;
 	}
 
 	.secondary-menu__group a {
 		text-decoration: none;
 		color: var(--c-black);
+	}
+	.secondary-menu__group a:hover {
+		text-decoration: underline;
 	}
 </style>

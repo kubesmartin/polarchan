@@ -11,7 +11,7 @@
 	export let title = 'Thank you for your submission';
 
 	const goToCreateItem = () => {
-		goto(`${base}/create-item`);
+		goto(`${base}/items/create`);
 	};
 
 	const startNewBlankCreation = () => {
@@ -36,7 +36,7 @@
 	// get itemHref from search param id of the url and set it to the href of the button
 	const itemHrefIdParam: string | null = browser ? $page.url.searchParams.get('id') : null;
 
-	const itemHref = `${base}/item?id=${itemHrefIdParam}`;
+	const itemHref = `${base}/items/detail?id=${itemHrefIdParam}`;
 </script>
 
 <LayoutRestricted {title}>

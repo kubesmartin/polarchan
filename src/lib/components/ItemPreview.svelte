@@ -57,7 +57,7 @@
 	<ThumbnailImage src={srcOfThumbnail} alt="thumbnail" />
 	<h3>{title}</h3>
 	<p>{materialType}, {politicalItem.year}</p>
-	<a href="/item?id={politicalItem.id}">More info</a>
+	<a href="/items/detail?id={politicalItem.id}">More info</a>
 </div>
 
 <style>
