@@ -6,7 +6,7 @@
 	import ItemFilterFormBody from './ItemFilterFormBody.svelte';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import { getContext } from 'svelte';
-	import { doc, setDoc } from 'firebase/firestore';
+	import { collection, addDoc } from 'firebase/firestore';
 	import { db } from '$lib/firebase';
 	import { get } from 'svelte/store';
 
@@ -25,7 +25,7 @@
 		// store the filter object
 		const user = get(auth.store);
 		if (!user) return;
-		await setDoc(doc(db, `queries/${user.uid}`), {
+		await addDoc(collection(db, `users/${user.uid}/queries`), {
 			...filter
 		});
 		alert('Query saved. You can now analyze and export the data in the "Queries" section.');

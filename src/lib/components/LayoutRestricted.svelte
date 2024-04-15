@@ -16,6 +16,10 @@
 	const user = auth.store;
 </script>
 
+<svelte:head>
+	<title>PolARCHAN: {title}</title>
+</svelte:head>
+
 <BorderWrap>
 	<div class="holder">
 		<WidthHolder>

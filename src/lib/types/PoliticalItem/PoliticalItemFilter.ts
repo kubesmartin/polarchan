@@ -38,3 +38,10 @@ export interface PoliticalItemFilter {
 		direction: 'asc' | 'desc';
 	};
 }
+
+export interface PoliticalItemFilterSaved extends PoliticalItemFilter {
+	/**
+	 * The id of the saved filter
+	 */
+	id: string;
+}

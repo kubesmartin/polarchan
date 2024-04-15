@@ -51,4 +51,9 @@
 	.isErrored select {
 		border-color: var(--c-error);
 	}
+	:disabled {
+		background: var(--c-accent-black);
+		color: var(--c-accent-white);
+		cursor: not-allowed;
+	}
 </style>
