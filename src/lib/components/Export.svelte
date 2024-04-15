@@ -7,6 +7,7 @@
 	import Loader from './Loader.svelte';
 
 	export let filter: PoliticalItemFilter;
+
 	let fileName = 'export';
 	let loading = false;
 	let error = '';

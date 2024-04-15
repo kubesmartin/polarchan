@@ -2,16 +2,11 @@
 	import { goto } from '$app/navigation';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import { getContext } from 'svelte';
+	import { base } from '$app/paths';
 	import NavItem from './NavItem.svelte';
 
 	const auth: IAuthService = getContext('auth');
-	const logout = async () => {
-		await auth.logout();
-		goto('/');
-	};
-
 	const store = auth.store;
-
 	let showUserMenu = false;
 </script>
 
@@ -33,7 +28,7 @@
 		<div class="user-indicator__menu">
 			<span class="bold">{$store.displayName}</span>
 			<span>{$store.email}</span>
-			<button class="logout" on:click={logout}>Logout</button>
+			<a href={base + '/logout'} class="logout">Log out</a>
 		</div>
 	{/if}
 </div>
@@ -92,17 +87,18 @@
 	.bold {
 		font-weight: bold;
 	}
-	.logout {
+	a.logout {
 		background: none;
 		border: none;
 		color: var(--c-brand);
 		cursor: pointer;
 		font-size: 0.875rem;
 		padding: 0;
-		&:hover {
-			text-decoration: underline;
-		}
-		margin-top: 0.25rem;
 		width: fit-content;
+		text-decoration: none;
+		font-weight: bold;
+	}
+	a.logout:hover {
+		opacity: 0.5;
 	}
 </style>

@@ -10,6 +10,10 @@
 				{
 					name: 'Create item',
 					link: '/items/create'
+				},
+				{
+					name: 'Export items',
+					link: '/items/export'
 				}
 			]
 		},
