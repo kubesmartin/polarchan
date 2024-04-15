@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let href: string;
+	export let disabled = false;
 </script>
 
-<a {href}>
+<a {href} class:disabled>
 	<slot />
 </a>
 
@@ -17,6 +18,12 @@
 		&:hover {
 			color: var(--c-accent-brand);
 			border-color: var(--c-accent-brand);
+		}
+		&.disabled {
+			border-color: var(--c-accent-black);
+			color: var(--c-accent-black);
+			cursor: not-allowed;
+			pointer-events: none;
 		}
 	}
 </style>

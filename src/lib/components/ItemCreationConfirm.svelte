@@ -8,6 +8,7 @@
 	import { get } from 'svelte/store';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import type { Fields } from '$lib/config/meta';
+	import { base } from '$app/paths';
 
 	export let metaDataStore: Writable<Fields>;
 	export let filesStore: Writable<File[]>;
@@ -35,7 +36,7 @@
 				throw new Error('You need to be logged in to upload an item');
 			}
 			const id = await saveItem(metaData, files, userStore.uid);
-			goto(`/item?id=${id}&uploaded=true`);
+			goto(`${base}/thank-you?id=${id}`);
 		} catch (error) {
 			if (error instanceof Error) {
 				errorMessages = [error.message];
