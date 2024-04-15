@@ -149,18 +149,17 @@ export const fieldsInMeta: Fields = [
 	},
 	{
 		id: 'campaignType',
-		type: 'select',
+		type: 'select-multiple',
 		label: 'Campaign type',
 		options: [
 			{ id: 'product', name: 'Product campaign' },
 			{ id: 'negative', name: 'Negative campaign' },
 			{ id: 'comparison', name: 'Comparison campaign' },
-			{ id: 'image', name: 'Image campaign' },
-			{ id: 'other', name: 'Other / Hard to say' }
+			{ id: 'image', name: 'Image campaign' }
 		],
-		value: '',
-		required: true,
-		placeholder: 'Select campaign type',
+		value: [],
+		required: false,
+		placeholder: 'Select campaign type (type space to see all options)',
 		case: (fields: Fields) =>
 			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
 	},

@@ -68,7 +68,7 @@
 			{/each}
 		</ul>
 	{/if}
-	<div class="chips-container">
+	<div class="chips-container" class:disableChips={disabled}>
 		{#each values as value}
 			<span class="chip">
 				{options.find((option) => option.id === value)?.name || ''}
@@ -157,5 +157,18 @@
 	.isErrored .autocomplete-input,
 	.isErrored .options-list {
 		border-color: var(--c-error);
+	}
+	.disableChips .chip {
+		background: var(--c-accent-black);
+		color: var(--c-accent-white);
+		cursor: not-allowed;
+	}
+	:disabled {
+		background: var(--c-accent-black);
+		color: var(--c-accent-white);
+		cursor: not-allowed;
+	}
+	input::placeholder {
+		color: var(--c-accent-black);
 	}
 </style>

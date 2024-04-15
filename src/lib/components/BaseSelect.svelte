@@ -51,4 +51,18 @@
 	.isErrored select {
 		border-color: var(--c-error);
 	}
+	:disabled {
+		background: var(--c-accent-black);
+		color: var(--c-accent-white);
+		cursor: not-allowed;
+	}
+	select:required:invalid {
+		color: var(--c-accent-black);
+	}
+	option[value=''][disabled] {
+		display: none;
+	}
+	option {
+		color: var(--c-black);
+	}
 </style>

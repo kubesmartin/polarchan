@@ -69,6 +69,7 @@
 					bind:value={field.value}
 					options={field.options}
 					required={field.required}
+					placeholder={field.placeholder}
 				/>
 			{:else if field.type === 'select-multiple'}
 				<BaseSelectMultiple
@@ -77,6 +78,7 @@
 					bind:values={field.value}
 					options={field.options}
 					required={field.required}
+					placeholder={field.placeholder}
 				/>
 			{/if}
 		{/if}

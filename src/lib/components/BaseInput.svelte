@@ -54,4 +54,12 @@
 	.isErrored input {
 		border-color: var(--c-error);
 	}
+	input::placeholder {
+		color: var(--c-accent-black);
+	}
+	:disabled {
+		background: var(--c-accent-black);
+		color: var(--c-accent-white);
+		cursor: not-allowed;
+	}
 </style>
