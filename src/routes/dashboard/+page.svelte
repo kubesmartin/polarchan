@@ -79,7 +79,6 @@
 		text-decoration: none;
 		justify-content: center;
 		align-items: center;
-		/* aspect-ratio: 1/1; */
 		aspect-ratio: 1/1;
 		flex-direction: column;
 		gap: 0.5rem;

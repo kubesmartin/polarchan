@@ -168,4 +168,7 @@
 		color: var(--c-accent-white);
 		cursor: not-allowed;
 	}
+	input::placeholder {
+		color: var(--c-accent-black);
+	}
 </style>
