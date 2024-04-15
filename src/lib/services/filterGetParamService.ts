@@ -52,7 +52,7 @@ export const getFilterUrl = (filter: PoliticalItemFilter): URLSearchParams => {
 	if (filter.year.from) parameters.set('yearFrom', filter.year.from.toString());
 	if (filter.year.to) parameters.set('yearTo', filter.year.to.toString());
 	if (filter.politicalParty.length > 0)
-		parameters.set('politicalSubjects', filter.politicalParty.join(','));
+		parameters.set('politicalSubjectIds', filter.politicalParty.join(','));
 	if (filter.electionType.length > 0) parameters.set('electionType', filter.electionType.join(','));
 	parameters.set('orderDirection', filter.order.direction);
 	parameters.set('orderBy', filter.order.by);

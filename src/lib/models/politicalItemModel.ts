@@ -67,6 +67,8 @@ const createBaseConstraintsFromFilter = (filter: PoliticalItemFilter): QueryCons
 	}
 	constraints.push(withOrderBy(filter.order.by, filter.order.direction));
 
+	console.log(constraints, 'constraints');
+
 	return constraints;
 };
 

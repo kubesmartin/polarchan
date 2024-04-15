@@ -1,9 +1,10 @@
 <script lang="ts">
 	export let href: string;
 	export let disabled = false;
+	export let target: '_blank' | '_self' = '_self';
 </script>
 
-<a {href} class:disabled>
+<a {href} {target} class:disabled>
 	<slot />
 </a>
 

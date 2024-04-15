@@ -1,20 +1,8 @@
 <script lang="ts">
-	import ThumbnailImage from './ThumbnailImage.svelte';
-
 	export let src: string;
-
-	const convertSrc = (src: string) => {
-		const parameteresOfThumbnailInGet = src.split('?')[1];
-		return src.replace(/\.[^/.]+$/, '.jpeg') + '?' + parameteresOfThumbnailInGet;
-	};
-	// convert that src to a thumbnail
-	const thumbnailSrc = convertSrc(src);
 </script>
 
-<div>
-	<ThumbnailImage src={thumbnailSrc} alt="thumbnail" />
-	<p>Material is not an image. View it <a href={src} target="_blank">here</a>.</p>
-</div>
+<iframe {src} title="video" width="100%" height="100%"></iframe>
 
 <style>
 	p {

@@ -14,6 +14,8 @@
 	let lastVisible: QueryDocumentSnapshot | null = null;
 	let items: Writable<PoliticalItem[]> = writable([]); // Use a writable store for items
 
+	let error: string | null = null;
+
 	const FETCH_LIMIT = 12;
 
 	// Initial fetch
@@ -24,8 +26,11 @@
 			items.update((currentItems) => [...currentItems, ...query.items]);
 		} catch (error) {
 			items.set([]);
-			// TODO: Handle error
-			throw error;
+			if (error instanceof Error) {
+				error = error.message;
+			} else {
+				error = 'An unknown error occurred';
+			}
 		}
 	}
 
@@ -61,6 +66,12 @@
 	{:catch error}
 		<p>{error.message}</p>
 	{/await}
+
+	{#if error}
+		<p>
+			{error}
+		</p>
+	{/if}
 </div>
 
 <style>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import ButtonBase from './ButtonBase.svelte';
+	import ButtonLink from './ButtonLink.svelte';
 	import ItemViewPhotoVideo from './ItemViewPhotoVideo.svelte';
 
 	export let srcs: string[] = [];
@@ -16,32 +17,6 @@
 			extension === 'webp'
 		) {
 			return true;
-		}
-	};
-
-	const triggerDownloadOfAll = async () => {
-		// Download all images
-		// remember it is firebase storage URL!
-		for (const src of srcs) {
-			try {
-				console.log(src);
-				const response = await fetch(src);
-				console.log(response);
-				if (!response.ok) throw new Error('Network response was not ok.');
-				const blob = await response.blob();
-				const url = window.URL.createObjectURL(blob);
-
-				const a = document.createElement('a');
-				a.style.display = 'none';
-				a.href = url;
-				document.body.appendChild(a);
-				a.click();
-
-				window.URL.revokeObjectURL(url);
-				document.body.removeChild(a);
-			} catch (err) {
-				alert('Error downloading image ' + JSON.stringify(err));
-			}
 		}
 	};
 </script>
@@ -61,7 +36,7 @@
 				>
 				<ButtonBase on:click={() => (current = (current + 1) % srcs.length)}>Next</ButtonBase>
 			{/if}
-			<ButtonBase on:click={triggerDownloadOfAll}>Download all</ButtonBase>
+			<ButtonLink href={srcs[current]} target="_blank">Open in new tab</ButtonLink>
 		</div>
 	{:else}
 		<p>No images found</p>
