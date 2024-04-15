@@ -17,6 +17,7 @@
 
 	$: searchParams = getFilterUrl(filter);
 	$: linkToBrowse = `${base}/items?${searchParams}`;
+	$: linkToExport = `${base}/items/export?${searchParams}`;
 
 	const startEditation = () => {
 		backupFilter = JSON.parse(JSON.stringify(filter));
@@ -26,6 +27,7 @@
 	const save = () => {
 		disabled = true;
 		updateQuery();
+		searchParams = getFilterUrl(filter);
 		dispatch('save', filter);
 		backupFilter = JSON.parse(JSON.stringify(filter));
 	};
@@ -58,6 +60,7 @@
 		{#if disabled}
 			<ButtonBase on:click={startEditation}>Edit query</ButtonBase>
 			<ButtonLink href={linkToBrowse} target="_blank">Browse</ButtonLink>
+			<ButtonLink href={linkToExport} target="_blank">Export</ButtonLink>
 			<ButtonBase on:click={deleteQuery}>Delete</ButtonBase>
 		{:else}
 			<ButtonBase on:click={save}>Confirm</ButtonBase>

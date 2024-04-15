@@ -9,6 +9,7 @@
 	import { collection, addDoc } from 'firebase/firestore';
 	import { db } from '$lib/firebase';
 	import { get } from 'svelte/store';
+	import ButtonLink from './ButtonLink.svelte';
 
 	export let filter: PoliticalItemFilter;
 
@@ -30,6 +31,11 @@
 		});
 		alert('Query saved. You can now analyze and export the data in the "Queries" section.');
 	};
+
+	const goToExport = () => {
+		const parameters = getFilterUrl(filter);
+		goto(`/items/export?${parameters}`);
+	};
 </script>
 
 <form on:submit|preventDefault={submit}>
@@ -38,7 +44,8 @@
 	<div>
 		<ButtonBase type="submit">Filter</ButtonBase>
 		<ButtonBase type="button" on:click={() => goto('/items')}>Clear</ButtonBase>
-		<ButtonBase type="button" on:click={saveQuery}>Save for analysis & export</ButtonBase>
+		<ButtonBase type="button" on:click={saveQuery}>Save</ButtonBase>
+		<ButtonBase type="button" on:click={goToExport}>Export</ButtonBase>
 	</div>
 </form>
 

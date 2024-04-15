@@ -17,7 +17,7 @@
 			groupName: 'Queries',
 			items: [
 				{
-					name: 'My saved queries: Browse, edit or export to CSV',
+					name: 'My saved queries',
 					link: '/queries'
 				}
 			]
