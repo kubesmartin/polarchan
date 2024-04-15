@@ -8,6 +8,7 @@
 	import { politicalItemTypes } from '$lib/consts/politicalItemTypes';
 
 	export let filter: PoliticalItemFilter;
+	export let disabled: boolean = false;
 
 	let typeOptions: { id: string | null; name: string }[] = politicalItemTypes.map((type) => ({
 		id: type,
@@ -21,8 +22,8 @@
 
 <div class="form-body">
 	<div class="group">
-		<NumericalInput id="yearFrom" label="Year from" bind:value={filter.year.from} />
-		<NumericalInput id="yearTo" label="Year to" bind:value={filter.year.to} />
+		<NumericalInput id="yearFrom" label="Year from" bind:value={filter.year.from} {disabled} />
+		<NumericalInput id="yearTo" label="Year to" bind:value={filter.year.to} {disabled} />
 	</div>
 	<div class="group">
 		<BaseSelect
@@ -32,7 +33,13 @@
 			options={[{ id: 'cz', name: 'Czech Republic' }]}
 			disabled
 		/>
-		<BaseSelect id="type" label="Type of material" bind:value={filter.type} options={typeOptions} />
+		<BaseSelect
+			id="type"
+			label="Type of material"
+			bind:value={filter.type}
+			options={typeOptions}
+			{disabled}
+		/>
 	</div>
 	<div class="group">
 		<BaseSelect
@@ -43,6 +50,7 @@
 				{ id: 'year', name: 'Year' },
 				{ id: 'added', name: 'Added' }
 			]}
+			{disabled}
 		/>
 		<BaseSelect
 			id="orderDirection"
@@ -52,6 +60,7 @@
 				{ id: 'asc', name: 'Ascending' },
 				{ id: 'desc', name: 'Descending' }
 			]}
+			{disabled}
 		/>
 	</div>
 	<BaseSelectMultiple
@@ -61,6 +70,7 @@
 		placeholder="Add subjects to selection by searching official name or abbreviation"
 		bind:values={filter.politicalParty}
 		noSelectedSettings={{ message: 'All included', color: 'success' }}
+		{disabled}
 	/>
 	<BaseSelectMultiple
 		id="typeOfElection"
@@ -69,6 +79,7 @@
 		placeholder="Add election types to selection"
 		options={electionTypes}
 		noSelectedSettings={{ message: 'All included', color: 'success' }}
+		{disabled}
 	/>
 </div>
 

@@ -2,23 +2,44 @@
 	import type { PoliticalItemFilter } from '$lib/types/PoliticalItem/PoliticalItemFilter';
 	import { goto } from '$app/navigation';
 	import { getFilterUrl } from '$lib/services/filterGetParamService';
-	import { politicalItemTypes } from '$lib/consts/politicalItemTypes';
 	import ButtonBase from './ButtonBase.svelte';
 	import ItemFilterFormBody from './ItemFilterFormBody.svelte';
+	import type { IAuthService } from '$lib/interfaces/IAuthService';
+	import { getContext } from 'svelte';
+	import { doc, setDoc } from 'firebase/firestore';
+	import { db } from '$lib/firebase';
+	import { get } from 'svelte/store';
 
 	export let filter: PoliticalItemFilter;
+
+	const auth: IAuthService = getContext<IAuthService>('auth');
 
 	const submit = () => {
 		console.log(filter);
 		const parameters = getFilterUrl(filter);
 		goto(`/items?${parameters}`);
 	};
+
+	const saveQuery = async () => {
+		// use firestore, collection 'queries' subcollection 'user.uid'
+		// store the filter object
+		const user = get(auth.store);
+		if (!user) return;
+		await setDoc(doc(db, `queries/${user.uid}`), {
+			...filter
+		});
+		alert('Query saved. You can now analyze and export the data in the "Queries" section.');
+	};
 </script>
 
 <form on:submit|preventDefault={submit}>
 	<h2>Query Parameters</h2>
 	<ItemFilterFormBody {filter} />
-	<ButtonBase type="submit">Filter</ButtonBase>
+	<div>
+		<ButtonBase type="submit">Filter</ButtonBase>
+		<ButtonBase type="button" on:click={() => goto('/items')}>Clear</ButtonBase>
+		<ButtonBase type="button" on:click={saveQuery}>Save for analysis & export</ButtonBase>
+	</div>
 </form>
 
 <style>
