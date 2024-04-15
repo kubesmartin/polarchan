@@ -67,10 +67,6 @@
 		align-items: left;
 		max-width: 200px;
 	}
-	img {
-		width: 100%;
-		height: auto;
-	}
 	h3 {
 		margin: 0;
 		margin-top: 0.5rem;
