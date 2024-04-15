@@ -41,9 +41,17 @@
 
 <LayoutRestricted {title}>
 	<p>Your item has been successfully submitted. Thank you for contributing to our platform!</p>
-	<ButtonBase on:click={startNewCreationWithSameMetadata}
-		>Submit another with the similar metadata</ButtonBase
-	>
-	<ButtonBase on:click={startNewBlankCreation}>Submit another with a blank metadata</ButtonBase>
-	<ButtonLink href={itemHref} disabled={!itemHrefIdParam}>View your item</ButtonLink>
+	<div class="controls">
+		<ButtonBase on:click={startNewCreationWithSameMetadata}
+			>Submit another (same metadata prefilled)</ButtonBase
+		>
+		<ButtonBase on:click={startNewBlankCreation}>Submit another</ButtonBase>
+		<ButtonLink href={itemHref} disabled={!itemHrefIdParam}>View your item</ButtonLink>
+	</div>
 </LayoutRestricted>
+
+<style>
+	.controls {
+		margin-top: 2rem;
+	}
+</style>

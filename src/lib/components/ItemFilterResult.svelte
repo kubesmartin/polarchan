@@ -14,7 +14,7 @@
 	let lastVisible: QueryDocumentSnapshot | null = null;
 	let items: Writable<PoliticalItem[]> = writable([]); // Use a writable store for items
 
-	const FETCH_LIMIT = 2;
+	const FETCH_LIMIT = 12;
 
 	// Initial fetch
 	async function fetchItems() {

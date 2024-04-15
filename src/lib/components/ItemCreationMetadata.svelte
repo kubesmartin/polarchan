@@ -17,18 +17,25 @@
 
 	const submit = () => {
 		// check if all fields with .required are filled
-		const requiredFieldsFilled = fields.every((field) => {
+		// take in account the case function!
+		const nonFilledFields = fields.filter((field) => {
+			if (field.case && !field.case(fields)) {
+				return false;
+			}
 			if (field.required) {
 				if (field.type === 'select-multiple') {
-					return field.value.length > 0;
+					return field.value.length === 0;
 				}
-				return field.value !== '';
+				return field.value === '';
 			}
-			return true;
+			return false;
 		});
 
-		if (!requiredFieldsFilled) {
-			errors = ['Please fill in all required fields'];
+		if (nonFilledFields.length > 0) {
+			errors = [
+				'Please fill in all required fields:',
+				...nonFilledFields.map((field) => field.label)
+			];
 			return;
 		}
 		errors = [];

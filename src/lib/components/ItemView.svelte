@@ -2,6 +2,7 @@
 	import type { PoliticalItem } from '$lib/types/PoliticalItem/PoliticalItem';
 	import { fieldsInMeta } from '$lib/config/meta';
 	import ButtonBase from './ButtonBase.svelte';
+	import ItemViewPhoto from './ItemViewPhoto.svelte';
 
 	export let item: PoliticalItem;
 
@@ -74,21 +75,26 @@
 	});
 </script>
 
-<h2>
-	Item {item.id}
-</h2>
-<div class="fields">
-	{#each fields as field}
-		{#if field.label !== 'id' && field.value !== ''}
-			<div class="field">
-				<div class="label">{field.label}</div>
-				<div class="value">{field.value}</div>
-			</div>
-		{/if}
-	{/each}
-</div>
-<div class="buttons">
-	<ButtonBase on:click={() => window.history.back()}>Navigate back</ButtonBase>
+<div class="grid">
+	<div>
+		<h2>
+			ID {item.id}
+		</h2>
+		<div class="fields">
+			{#each fields as field}
+				{#if field.label !== 'id' && field.value !== ''}
+					<div class="field">
+						<div class="label">{field.label}</div>
+						<div class="value">{field.value}</div>
+					</div>
+				{/if}
+			{/each}
+		</div>
+		<div class="buttons">
+			<ButtonBase on:click={() => window.history.back()}>Navigate back</ButtonBase>
+		</div>
+	</div>
+	<ItemViewPhoto srcs={item.files} />
 </div>
 
 <style>
@@ -109,5 +115,19 @@
 
 	.buttons {
 		margin-top: 2rem;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 2rem;
+	}
+	@media (max-width: 1200px) {
+		.grid {
+			grid-template-columns: 1fr;
+			/* reverse order */
+		}
+		.grid > div:nth-child(1) {
+			order: 2;
+		}
 	}
 </style>
