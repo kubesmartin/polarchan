@@ -21,6 +21,7 @@
 		padding: 0.5rem 1rem;
 		background: none;
 		cursor: pointer;
+		font-family: var(--font-body);
 		&:hover {
 			color: var(--c-accent-brand);
 			border-color: var(--c-accent-brand);

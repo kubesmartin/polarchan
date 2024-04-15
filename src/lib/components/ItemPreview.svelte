@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PoliticalItem } from '$lib/types/PoliticalItem/PoliticalItem';
 	import { czechPoliticalSubjects } from '$lib/consts/czechPoliticalSubjects';
+	import ThumbnailImage from './ThumbnailImage.svelte';
 
 	export let politicalItem: PoliticalItem;
 
@@ -14,12 +15,17 @@
 	const getSrcOfThumbnail = (files: string[]) => {
 		const thumbnailOriginalFile = files[0];
 		const parameteresOfThumbnailInGet = thumbnailOriginalFile.split('?')[1];
+		// check if it has in string any signs that it is a video format
+		if (thumbnailOriginalFile.includes('mp4') || thumbnailOriginalFile.includes('webm')) {
+			// if it is a video, return the original file
+			return (
+				thumbnailOriginalFile.replace(/\.[^/.]+$/, '.jpeg') + '?' + parameteresOfThumbnailInGet
+			);
+		}
 		const thumbnailResizedFile =
 			thumbnailOriginalFile.replace(/\.[^/.]+$/, '_200x200.webp') +
 			'?' +
 			parameteresOfThumbnailInGet;
-		console.log(thumbnailResizedFile);
-		console.log(thumbnailOriginalFile);
 		return thumbnailResizedFile;
 	};
 
@@ -28,7 +34,13 @@
 	const politicalSubjectIds = politicalItem.politicalSubjectIds;
 
 	const politicalSubjects = politicalSubjectIds.map((id) => {
-		return czechPoliticalSubjects.find((subject) => subject.id === id);
+		const foundSubject = czechPoliticalSubjects.find((subject) => subject.id === id);
+		if (foundSubject !== undefined) {
+			return foundSubject;
+		} else {
+			console.error(`Political subject with id ${id} not found`);
+			return { id: '', name: 'Not found', abbreviation: 'Not found', type: 'NF' };
+		}
 	});
 
 	/** Transfer mass-printed to Mass Printed etc. */
@@ -42,10 +54,10 @@
 </script>
 
 <div class="item-preview">
-	<img src={srcOfThumbnail} alt="item image" />
+	<ThumbnailImage src={srcOfThumbnail} alt="thumbnail" />
 	<h3>{title}</h3>
 	<p>{materialType}, {politicalItem.year}</p>
-	<a href="/items/{politicalItem.id}">More info</a>
+	<a href="/item?id={politicalItem.id}">More info</a>
 </div>
 
 <style>

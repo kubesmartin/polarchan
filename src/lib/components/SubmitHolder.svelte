@@ -11,7 +11,7 @@
 		{/each}
 	</div>
 	<div class="submit-holder__button">
-		<ButtonBase>Next step</ButtonBase>
+		<ButtonBase type="submit">Next step</ButtonBase>
 	</div>
 </div>
 

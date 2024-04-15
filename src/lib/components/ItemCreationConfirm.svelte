@@ -1,5 +1,4 @@
 <script lang="ts">
-	import type { PoliticalItemForm } from '$lib/stores/itemCreationStore';
 	import { saveItem } from '$lib/utils/saveItem';
 	import type { Writable } from 'svelte/store';
 	import ButtonBase from './ButtonBase.svelte';
@@ -8,8 +7,10 @@
 	import { getContext } from 'svelte';
 	import { get } from 'svelte/store';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
+	import type { Fields } from '$lib/config/meta';
+	import { base } from '$app/paths';
 
-	export let metaDataStore: Writable<PoliticalItemForm>;
+	export let metaDataStore: Writable<Fields>;
 	export let filesStore: Writable<File[]>;
 
 	let isUploading: boolean = false;
@@ -35,7 +36,7 @@
 				throw new Error('You need to be logged in to upload an item');
 			}
 			const id = await saveItem(metaData, files, userStore.uid);
-			goto(`/item?id=${id}&uploaded=true`);
+			goto(`${base}/thank-you?id=${id}`);
 		} catch (error) {
 			if (error instanceof Error) {
 				errorMessages = [error.message];
@@ -67,7 +68,7 @@
 	{#if isUploading}
 		<p>Uploading...</p>
 	{:else}
-		<ButtonBase>Confirm and upload</ButtonBase>
+		<ButtonBase type="submit">Confirm and upload</ButtonBase>
 	{/if}
 </form>
 

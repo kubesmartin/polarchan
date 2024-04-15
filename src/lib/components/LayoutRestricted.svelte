@@ -7,6 +7,8 @@
 	import NavbarSecondary from './NavbarSecondary.svelte';
 	import { getContext } from 'svelte';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
+	import Loader from './Loader.svelte';
+	import ButtonLink from './ButtonLink.svelte';
 
 	export let title: string;
 
@@ -24,7 +26,10 @@
 				<div>
 					<BasePageHeading {title} />
 					{#if $user === null}
+						<Loader />
+					{:else if $user === false}
 						<p>You are not logged in. Please sign in to access this page.</p>
+						<ButtonLink href="/login">Log in</ButtonLink>
 					{:else}
 						<slot />
 					{/if}

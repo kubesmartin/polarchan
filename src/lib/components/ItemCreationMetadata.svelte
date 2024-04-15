@@ -1,100 +1,86 @@
 <script lang="ts">
-	import { czechPoliticalSubjects } from '$lib/consts/czechPoliticalSubjects';
-	import { electionTypes } from '$lib/consts/electionTypes';
-	import type { Writable } from 'svelte/store';
 	import BaseInput from './BaseInput.svelte';
 	import BaseSelectMultiple from './BaseAutocomplete.svelte';
 	import { createEventDispatcher } from 'svelte';
-	import type { PoliticalItemForm } from '$lib/stores/itemCreationStore';
 	import SubmitHolder from './SubmitHolder.svelte';
 	import BaseSelect from './BaseSelect.svelte';
 	import NumericalInput from './NumericalInput.svelte';
+	import { fieldsInMeta, type Fields } from '$lib/config/meta';
+	import type { Writable } from 'svelte/store';
 
 	const dispatch = createEventDispatcher();
 
-	export let store: Writable<PoliticalItemForm>;
+	export let store: Writable<Fields>;
+	let fields: Fields = $store.length > 0 ? $store : fieldsInMeta;
 
 	let errors: string[] = [];
 
 	const submit = () => {
-		console.log($store);
-		if (
-			!$store.country ||
-			!$store.typeOfElectionId ||
-			!$store.politicalSubjectIds.length ||
-			!$store.electionYear
-		) {
-			errors = ['Please fill in all required fields'];
+		// check if all fields with .required are filled
+		// take in account the case function!
+		const nonFilledFields = fields.filter((field) => {
+			if (field.case && !field.case(fields)) {
+				return false;
+			}
+			if (field.required) {
+				if (field.type === 'select-multiple') {
+					return field.value.length === 0;
+				}
+				return field.value === '';
+			}
+			return false;
+		});
+
+		if (nonFilledFields.length > 0) {
+			errors = [
+				'Please fill in all required fields:',
+				...nonFilledFields.map((field) => field.label)
+			];
 			return;
 		}
 		errors = [];
+		store.set(fields);
 		dispatch('validSubmit');
 	};
 </script>
 
 <form on:submit|preventDefault={submit}>
-	<BaseSelect
-		id="country"
-		label="Country"
-		bind:value={$store.country}
-		required
-		disabled
-		options={[{ id: 'cz', name: 'Czech Republic' }]}
-	/>
-	<BaseSelect
-		id="electionType"
-		label="Election type"
-		options={electionTypes}
-		required
-		placeholder="Select the country's election type"
-		bind:value={$store.typeOfElectionId}
-	/>
-	<NumericalInput
-		id="electionYear"
-		label="Election year"
-		bind:value={$store.electionYear}
-		required
-	/>
-	<BaseSelectMultiple
-		id="politicalSubjects"
-		label="Political subjects (multiple, at least one required)"
-		options={czechPoliticalSubjects}
-		required
-		placeholder="Add subjects to selection by searching official name or abbreviation"
-		bind:values={$store.politicalSubjectIds}
-	/>
-	{#if $store.politicalSubjectIds.length > 1 || $store.coalitionName}
-		<BaseInput
-			id="coalition"
-			label="Because you selected more than one political subject, you can type in the name of the coalition"
-			type="text"
-			bind:value={$store.coalitionName}
-		/>
-	{/if}
-	<BaseSelect
-		id="typeOfPoliticalItem"
-		label="Type of the material"
-		options={[
-			{ id: 'mass-printed', name: 'Mass-printed material' },
-			{ id: 'spot', name: 'Spot' },
-			{ id: 'other', name: 'Other' }
-		]}
-		required
-		placeholder="Select the type of the material"
-		bind:value={$store.typeOfPoliticalItem}
-	/>
-	{#if !$store.typeOfPoliticalItem}
-		<p>More fields could appear once you select the type of the material</p>
-	{:else}
-		{#if $store.typeOfPoliticalItem === 'mass-printed'}{/if}
-		{#if $store.typeOfPoliticalItem === 'spot'}{/if}
-		<BaseInput
-			id="additionalInfo"
-			label="Additional information"
-			type="text"
-			bind:value={$store.additionalInformation}
-		/>
-	{/if}
+	{#each fields as field (field.id)}
+		{#if !field.case || field.case(fields)}
+			{#if field.type === 'number'}
+				<NumericalInput
+					id={field.id}
+					label={field.label}
+					bind:value={field.value}
+					required={field.required}
+				/>
+			{:else if field.type === 'text'}
+				<BaseInput
+					id={field.id}
+					label={field.label}
+					type="text"
+					bind:value={field.value}
+					required={field.required}
+				/>
+			{:else if field.type === 'select'}
+				<BaseSelect
+					id={field.id}
+					label={field.label}
+					bind:value={field.value}
+					options={field.options}
+					required={field.required}
+				/>
+			{:else if field.type === 'select-multiple'}
+				<BaseSelectMultiple
+					id={field.id}
+					label={field.label}
+					bind:values={field.value}
+					options={field.options}
+					required={field.required}
+				/>
+			{/if}
+		{/if}
+	{/each}
 	<SubmitHolder {errors} />
 </form>
 
