@@ -9,8 +9,8 @@
 	import { collection, addDoc } from 'firebase/firestore';
 	import { db } from '$lib/firebase';
 	import { get } from 'svelte/store';
-	import ButtonLink from './ButtonLink.svelte';
 
+	export let user: null | false | Record<string, unknown> = false;
 	export let filter: PoliticalItemFilter;
 
 	const auth: IAuthService = getContext<IAuthService>('auth');
@@ -44,8 +44,8 @@
 	<div>
 		<ButtonBase type="submit">Filter</ButtonBase>
 		<ButtonBase type="button" on:click={() => goto('/items')}>Clear</ButtonBase>
-		<ButtonBase type="button" on:click={saveQuery}>Save</ButtonBase>
-		<ButtonBase type="button" on:click={goToExport}>Export</ButtonBase>
+		<ButtonBase isDisabled={!user} type="button" on:click={saveQuery}>Save</ButtonBase>
+		<ButtonBase isDisabled={!user} type="button" on:click={goToExport}>Export</ButtonBase>
 	</div>
 </form>
 
