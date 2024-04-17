@@ -27,6 +27,7 @@
 		<div class="user-indicator__menu">
 			<span class="bold">{$store.displayName}</span>
 			<span>{$store.email}</span>
+			<a href={base + '/dashboard'} class="logout">Administration</a>
 			<a href={base + '/logout'} class="logout">Log out</a>
 		</div>
 	{/if}
