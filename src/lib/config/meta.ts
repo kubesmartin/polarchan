@@ -90,15 +90,15 @@ export const fieldsInMeta: Fields = [
 		required: true
 	},
 	{
-		id: 'coalitionName',
+		id: 'subjectName',
 		type: 'text',
-		label: 'Coalition name',
-		placeholder: 'Enter coalition name',
+		label: 'Subject name',
+		placeholder: 'Enter subject name (coaltion or person)',
 		value: '',
 		required: false,
 		case: (fields: Fields) =>
 			checkCondition(fields, 'politicalSubjectIds', (value) =>
-				Array.isArray(value) ? value.length > 1 : false
+				Array.isArray(value) ? (value.length > 1 ? true : value.includes('other')) : false
 			)
 	},
 	{
@@ -170,8 +170,7 @@ export const fieldsInMeta: Fields = [
 		placeholder: 'Enter main message',
 		value: '',
 		required: false,
-		case: (fields: Fields) =>
-			checkCondition(fields, 'type', (value) => value === 'mass-printed' || value === 'spot')
+		case: (fields: Fields) => checkCondition(fields, 'type', (value) => value === 'mass-printed')
 	},
 	{
 		id: 'programmePriorities',
