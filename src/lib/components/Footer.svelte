@@ -8,7 +8,10 @@
 			<p>
 				PolARCHAN, version {version}
 			</p>
-			<p>Created by Martin Kubeš, coded by Michaela Vojtěchovská</p>
+			<p>
+				Created by <a href="https://kubesmartin.cz" target="_blank">Martin Kubeš</a> and
+				<a href="https://vojtechovska.com" target="_blank">Michaela Vojtechovska</a>
+			</p>
 			<p>
 				<a href="https://kpes.upol.cz/en/" target="_blank">
 					Department of Politics and European Studies, Palacký University Olomouc

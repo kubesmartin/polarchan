@@ -7,23 +7,32 @@
 	import type { PoliticalItem } from '$lib/types/PoliticalItem/PoliticalItem';
 	import type { Writable } from 'svelte/store';
 	import ButtonBase from './ButtonBase.svelte';
+	import Loader from './Loader.svelte';
 
 	export let filter: PoliticalItemFilter;
+	export let FETCH_LIMIT = 12;
+
 	let previousFilter = JSON.stringify(filter); // Store the previous filter for comparison
 
 	let lastVisible: QueryDocumentSnapshot | null = null;
-	let items: Writable<PoliticalItem[]> = writable([]); // Use a writable store for items
+	let items: Writable<PoliticalItem[] | false> = writable(false); // Use a writable store for items
+	let noMoreItems = false;
 
 	let error: string | null = null;
-
-	const FETCH_LIMIT = 12;
 
 	// Initial fetch
 	async function fetchItems() {
 		try {
+			const savedItems = $items ? $items : []; // If items is not defined, set it to an empty arra
 			const query = await getPoliticalItemsByFilter(filter, lastVisible, FETCH_LIMIT);
 			lastVisible = query.lastVisible;
-			items.update((currentItems) => [...currentItems, ...query.items]);
+			const newItems = query.items;
+			if (newItems.length === 0) {
+				noMoreItems = true;
+			} else {
+				noMoreItems = false;
+			}
+			items.set([...savedItems, ...newItems]);
 		} catch (error) {
 			items.set([]);
 			if (error instanceof Error) {
@@ -41,7 +50,7 @@
 		const currentFilter = JSON.stringify(filter);
 		if (previousFilter !== currentFilter) {
 			lastVisible = null; // Reset pagination
-			items.set([]); // Clear items before fetching new ones
+			items.set(false); // Clear items before fetching new ones
 			fetchItems();
 			previousFilter = currentFilter; // Update the previous filter for next comparison
 		}
@@ -50,22 +59,24 @@
 
 <div class="main">
 	<h2>Results</h2>
-	{#await $items}
-		<p>Loading...</p>
-	{:then fetchedItems}
-		{#if fetchedItems.length > 0}
+	{#if $items}
+		{#if $items.length > 0}
 			<ul>
-				{#each fetchedItems as politicalItem (politicalItem.id)}
+				{#each $items as politicalItem (politicalItem.id)}
 					<ItemPreview {politicalItem} />
 				{/each}
 			</ul>
-			<ButtonBase on:click={fetchItems}>Load more</ButtonBase>
+			{#if !noMoreItems}
+				<ButtonBase on:click={fetchItems}>Load more</ButtonBase>
+			{:else}
+				<p>No more items found. Total count for this query: {$items.length}</p>
+			{/if}
 		{:else}
 			<p>No items found</p>
 		{/if}
-	{:catch error}
-		<p>{error.message}</p>
-	{/await}
+	{:else}
+		<Loader />
+	{/if}
 
 	{#if error}
 		<p>

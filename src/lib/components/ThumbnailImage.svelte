@@ -1,21 +1,21 @@
 <script lang="ts">
 	export let src: string | undefined;
 	export let alt: string | undefined;
+	export let maxWidth = '200px';
 </script>
 
 <div>
 	{#if src}
-		<img {src} {alt} />
+		<img {src} {alt} style="max-width: {maxWidth}" />
 	{/if}
 </div>
 
 <style>
 	img,
 	div {
-		max-width: 100%;
-		height: 200px;
+		height: auto;
 		object-fit: cover;
-		width: 200px;
+		width: 100%;
 	}
 	div {
 		display: flex;

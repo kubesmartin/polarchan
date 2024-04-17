@@ -44,5 +44,14 @@
 	.outer {
 		padding: 2.6rem;
 		margin-block: 4rem;
+		margin-top: 2rem;
+	}
+	@media (max-width: 800px) {
+		.columns {
+			grid-template-columns: 1fr;
+		}
+		.outer {
+			margin-top: 0;
+		}
 	}
 </style>

@@ -58,10 +58,21 @@
 		display: grid;
 		grid-template-columns: 280px 1fr;
 		gap: 4rem;
-		grid-template-areas: 'secondary main';
 	}
 	.secondary-menu {
-		grid-area: secondary;
+		order: -1;
 		border-right: 3px solid var(--c-brand);
+	}
+	@media (max-width: 800px) {
+		.grid {
+			grid-template-columns: 1fr;
+			grid-template-areas: 'main';
+		}
+		.secondary-menu {
+			border-top: 3px solid var(--c-brand);
+			border-right: none;
+			order: 2;
+			padding-top: 2rem;
+		}
 	}
 </style>

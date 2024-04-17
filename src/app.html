@@ -5,6 +5,54 @@
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<link rel="stylesheet" href="%sveltekit.assets%/app.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			"name": "PolARCHAN",
+			"url": "https://polarchan.com",
+			"applicationCategory": "Archiving",
+			"operatingSystem": "Any with a web browser",
+			"description": "PolARCHAN is a comprehensive web application developed by Palacký University Olomouc for archiving political items, facilitating the organization, storage, and retrieval of political documents and media.",
+			"browserRequirements": "Requires any modern web browser",
+			"softwareVersion": "0.0.1",
+			"datePublished": "2024-04-15",
+			"author": [{
+			    "@type": "Person",
+				"name": "Michaela Vojtechovska",
+				"url": "https://vojtechovska.com/",
+				"affiliation": {
+					"@type": "EducationalOrganization",
+					"name": "Palacky University Olomouc"
+          		}
+			},
+			{
+				"@type": "Person",
+				"name": "Martin Kubes",
+				"url": "https://kubesmartin.cz/",
+				"affiliation": {
+					"@type": "EducationalOrganization",
+					"name": "Palacky University Olomouc"
+		  		}
+			}
+			],
+			"publisher": {
+			"@type": "Organization",
+			"name": "Palacký University Olomouc",
+			"logo": {
+				"@type": "ImageObject",
+				"url": "https://polarchan.com/UP_logo_minimal.png"
+				}
+			},
+			"isAccessibleForFree": true,
+			"sourceOrganization": {
+				"@type": "Organization",
+				"name": "GitHub",
+				"url": "https://github.com"
+			},
+			"codeRepository": "https://github.com/misavojte/polarchan"
+		}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

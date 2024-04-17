@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import { getContext } from 'svelte';
 	import { base } from '$app/paths';
@@ -28,6 +27,7 @@
 		<div class="user-indicator__menu">
 			<span class="bold">{$store.displayName}</span>
 			<span>{$store.email}</span>
+			<a href={base + '/dashboard'} class="logout">Administration</a>
 			<a href={base + '/logout'} class="logout">Log out</a>
 		</div>
 	{/if}

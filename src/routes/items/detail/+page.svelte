@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LayoutRestricted from '$lib/components/LayoutRestricted.svelte';
+	import LayoutUnrestricted from '$lib/components/LayoutUnrestricted.svelte';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
 	import Loader from '$lib/components/Loader.svelte';
@@ -12,7 +12,7 @@
 	$: itemPromise = typeof id === 'string' ? getPoliticalItem(id) : null;
 </script>
 
-<LayoutRestricted {title}>
+<LayoutUnrestricted {title}>
 	{#if itemPromise !== null}
 		{#await itemPromise}
 			{id}
@@ -25,4 +25,4 @@
 	{:else}
 		<Loader />
 	{/if}
-</LayoutRestricted>
+</LayoutUnrestricted>

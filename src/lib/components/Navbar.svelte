@@ -11,7 +11,7 @@
 		},
 		{
 			label: 'Browse',
-			href: '/'
+			href: '/items'
 		}
 	];
 </script>
@@ -43,5 +43,10 @@
 	}
 	nav {
 		display: flex;
+	}
+	@media (max-width: 900px) {
+		.holder {
+			flex-direction: column;
+		}
 	}
 </style>

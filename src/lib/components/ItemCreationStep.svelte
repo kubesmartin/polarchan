@@ -34,10 +34,18 @@
 		<FileUpload store={itemCreationFilesStore} on:filesUploaded={startCreation} />
 	{/if}
 	{#if currentStep === 1}
-		<ItemCreationMetadata store={itemCreationStore} on:validSubmit={() => (currentStep = 2)} />
+		<ItemCreationMetadata
+			store={itemCreationStore}
+			files={itemCreationFilesStore}
+			on:validSubmit={() => (currentStep = 2)}
+		/>
 	{/if}
 	{#if currentStep === 2}
-		<ItemCreationConfirm metaDataStore={itemCreationStore} filesStore={itemCreationFilesStore} />
+		<ItemCreationConfirm
+			metaDataStore={itemCreationStore}
+			filesStore={itemCreationFilesStore}
+			on:back={() => (currentStep = 1)}
+		/>
 	{/if}
 </div>
 

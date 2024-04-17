@@ -4,6 +4,7 @@
 	import ThumbnailImage from './ThumbnailImage.svelte';
 
 	export let politicalItem: PoliticalItem;
+	export let maxWidth = '200px';
 
 	/**
 	 * Get the source of the thumbnail (Firestore storage URL)
@@ -53,8 +54,8 @@
 	const title = `${politicalSubjects.map((subject) => subject.abbreviation).join(', ')}`;
 </script>
 
-<div class="item-preview">
-	<ThumbnailImage src={srcOfThumbnail} alt="thumbnail" />
+<div class="item-preview" style="max-width: {maxWidth}">
+	<ThumbnailImage src={srcOfThumbnail} alt="thumbnail" {maxWidth} />
 	<h3>{title}</h3>
 	<p>{materialType}, {politicalItem.year}</p>
 	<a href="/items/detail?id={politicalItem.id}">More info</a>
@@ -65,7 +66,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: left;
-		max-width: 200px;
 	}
 	h3 {
 		margin: 0;

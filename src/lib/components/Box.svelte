@@ -22,4 +22,19 @@
 		margin-bottom: 2rem;
 		line-height: 1.2;
 	}
+	@media (max-width: 800px) {
+		.outer-holder {
+			padding: 1.8rem;
+		}
+	}
+	@media (max-width: 600px) {
+		h2 {
+			font-size: 1.8rem;
+		}
+	}
+	@media (max-width: 400px) {
+		h2 {
+			font-size: 1.25rem;
+		}
+	}
 </style>

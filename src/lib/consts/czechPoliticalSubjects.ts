@@ -5,6 +5,12 @@
  */
 export const czechPoliticalSubjects = [
 	{
+		name: 'Other',
+		abbreviation: 'Other',
+		type: 'other',
+		id: 'other'
+	},
+	{
 		name: 'Agr\u00e1rn\u00ed demokratick\u00e1 strana',
 		abbreviation: 'ADS',
 		type: 'party',
