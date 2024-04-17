@@ -47,7 +47,7 @@
 	}
 	.inner {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-gap: 1.8rem;
 	}
 	h2 {
@@ -67,5 +67,20 @@
 		display: block;
 		width: 100%;
 		height: 69px;
+	}
+	@media (max-width: 1000px) {
+		.inner {
+			grid-template-columns: 1fr 1fr;
+		}
+		@media (max-width: 600px) {
+			h2 {
+				font-size: 1.8rem;
+			}
+		}
+		@media (max-width: 400px) {
+			h2 {
+				font-size: 1.25rem;
+			}
+		}
 	}
 </style>

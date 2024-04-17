@@ -74,4 +74,20 @@
 		align-items: center;
 		flex-wrap: wrap;
 	}
+	@media (max-width: 600px) {
+		h2 {
+			font-size: 1.8rem;
+		}
+		img {
+			height: 100px;
+		}
+	}
+	@media (max-width: 400px) {
+		h2 {
+			font-size: 1.25rem;
+		}
+		img {
+			height: 75px;
+		}
+	}
 </style>

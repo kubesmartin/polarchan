@@ -28,4 +28,20 @@
 		opacity: 0.1;
 		font-family: var(--font-highlight);
 	}
+	@media (max-width: 600px) {
+		h2 {
+			font-size: 1.8rem;
+		}
+		quote {
+			font-size: 1rem;
+		}
+	}
+	@media (max-width: 400px) {
+		quote::before {
+			display: none;
+		}
+		quote {
+			padding: 0;
+		}
+	}
 </style>

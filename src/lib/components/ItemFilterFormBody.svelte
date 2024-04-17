@@ -95,4 +95,14 @@
 		grid-template-columns: repeat(2, 1fr);
 		gap: 1rem;
 	}
+	@media (max-width: 1200px) {
+		.form-body {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+	@media (max-width: 1000px) {
+		.form-body {
+			grid-template-columns: 1fr;
+		}
+	}
 </style>

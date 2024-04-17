@@ -10,7 +10,7 @@
 	<div class="outer-holder">
 		<WidthHolder>
 			<div class="holder">
-				<div>
+				<div class="first">
 					<h1>Archive, browse and analyse political advertisement.</h1>
 					<ButtonLink href="/items">Start browsing</ButtonLink>
 				</div>
@@ -67,5 +67,35 @@
 		margin: 0;
 		line-height: 1.2;
 		margin-bottom: 2rem;
+	}
+	@media (max-width: 1000px) {
+		.holder {
+			grid-template-columns: 1fr;
+		}
+		.first {
+			text-align: center;
+			margin-top: 2rem;
+		}
+		h1 {
+			font-size: 2.8rem;
+		}
+		.quote-holder {
+			margin-top: 0;
+			padding-inline: 2rem;
+			z-index: 9;
+		}
+		header {
+			height: unset;
+		}
+	}
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 2.4rem;
+		}
+	}
+	@media (max-width: 400px) {
+		h1 {
+			font-size: 1.8rem;
+		}
 	}
 </style>
