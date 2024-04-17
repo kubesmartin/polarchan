@@ -204,6 +204,11 @@ export const fieldsInMeta: Fields = [
 			{ id: 'yellow', name: 'Yellow' },
 			{ id: 'black', name: 'Black' },
 			{ id: 'white', name: 'White' },
+			{ id: 'orange', name: 'Orange' },
+			{ id: 'purple', name: 'Purple' },
+			{ id: 'pink', name: 'Pink' },
+			{ id: 'brown', name: 'Brown' },
+			{ id: 'grey', name: 'Grey' },
 			{ id: 'mixed', name: 'Mixed' },
 			{ id: 'other', name: 'Other' }
 		],
@@ -224,6 +229,11 @@ export const fieldsInMeta: Fields = [
 			{ id: 'yellow', name: 'Yellow' },
 			{ id: 'black', name: 'Black' },
 			{ id: 'white', name: 'White' },
+			{ id: 'orange', name: 'Orange' },
+			{ id: 'purple', name: 'Purple' },
+			{ id: 'pink', name: 'Pink' },
+			{ id: 'brown', name: 'Brown' },
+			{ id: 'grey', name: 'Grey' },
 			{ id: 'mixed', name: 'Mixed' },
 			{ id: 'other', name: 'Other' }
 		],
