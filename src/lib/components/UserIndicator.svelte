@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import { getContext } from 'svelte';
 	import { base } from '$app/paths';

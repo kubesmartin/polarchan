@@ -4,11 +4,25 @@
 	import { getFilterFromUrl } from '$lib/services/filterGetParamService';
 	import { page } from '$app/stores';
 	import { browser } from '$app/environment';
-	import Loader from '$lib/components/Loader.svelte';
 	import { getContext } from 'svelte';
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
+	import type { PoliticalItemFilter } from '$lib/types/PoliticalItem/PoliticalItemFilter';
 
-	$: filter = browser && getFilterFromUrl($page.url.searchParams);
+	const baseFilter: PoliticalItemFilter = {
+		type: null,
+		year: {
+			from: null,
+			to: null
+		},
+		politicalParty: [],
+		electionType: [],
+		order: {
+			by: 'year',
+			direction: 'desc'
+		}
+	};
+
+	$: filter = (browser && getFilterFromUrl($page.url.searchParams)) || baseFilter;
 	export let title = 'Browse items';
 
 	const auth: IAuthService = getContext('auth');
@@ -16,9 +30,5 @@
 </script>
 
 <LayoutUnrestricted {title}>
-	{#if filter}
-		<ItemFilter {filter} user={$user} />
-	{:else}
-		<Loader />
-	{/if}
+	<ItemFilter {filter} user={$user} />
 </LayoutUnrestricted>

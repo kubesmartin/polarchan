@@ -1,18 +1,24 @@
 <script lang="ts">
+	import { getPoliticalItemsByFilter } from '$lib/models/politicalItemModel';
+	import type { PoliticalItemFilter } from '$lib/types/PoliticalItem/PoliticalItemFilter';
+	import ItemPreview from './ItemPreview.svelte';
 	import WidthHolder from './WidthHolder.svelte';
 
-	const getItems = async () => {
-		/** Currently dummy placeholder
-		 * which will never resolve
-		 */
-		return new Promise((resolve, reject) => {
-			setTimeout(() => {
-				reject(new Error('Failed to fetch items from polARCHAN'));
-			}, 10000);
-		});
+	const baseFilter: PoliticalItemFilter = {
+		type: null,
+		year: {
+			from: null,
+			to: null
+		},
+		politicalParty: [],
+		electionType: [],
+		order: {
+			by: 'added',
+			direction: 'desc'
+		}
 	};
 
-	const items: Promise<any> = getItems();
+	const items = getPoliticalItemsByFilter(baseFilter, null, 4);
 </script>
 
 <div class="outer">
@@ -25,7 +31,9 @@
 				<div class="placeholder" />
 				<div class="placeholder" />
 			{:then data}
-				{data}
+				{#each data.items as politicalItem}
+					<ItemPreview {politicalItem} maxWidth="100%" />
+				{/each}
 			{:catch error}
 				<p>{error.message}</p>
 			{/await}
@@ -51,7 +59,13 @@
 	}
 	.placeholder {
 		background-color: #ccc;
-		height: 300px;
+		padding-top: 100%;
 		width: 100%;
+	}
+	.placeholder::after {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 69px;
 	}
 </style>
