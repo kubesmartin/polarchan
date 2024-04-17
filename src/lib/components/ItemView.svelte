@@ -3,6 +3,8 @@
 	import { fieldsInMeta } from '$lib/config/meta';
 	import ButtonBase from './ButtonBase.svelte';
 	import ItemViewPhoto from './ItemViewPhoto.svelte';
+	import ButtonLink from './ButtonLink.svelte';
+	import { base } from '$app/paths';
 
 	export let item: PoliticalItem;
 
@@ -120,6 +122,7 @@
 		</div>
 		<div class="buttons">
 			<ButtonBase on:click={() => window.history.back()}>Navigate back</ButtonBase>
+			<ButtonLink href={base + '/items'}>All items</ButtonLink>
 		</div>
 	</div>
 	<ItemViewPhoto {files} />
@@ -147,11 +150,12 @@
 	.grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		grid-gap: 2rem;
+		grid-gap: 4rem;
 	}
 	@media (max-width: 1200px) {
 		.grid {
 			grid-template-columns: 1fr;
+			gap: 2rem;
 			/* reverse order */
 		}
 		.grid > div:nth-child(1) {
