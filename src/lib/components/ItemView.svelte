@@ -6,6 +6,34 @@
 
 	export let item: PoliticalItem;
 
+	// there are search param after extension, so we look for
+	// regex match for the extension which is between dot and the ? or end of string
+	const getExtension = (filename: string) => {
+		const match = filename.match(/\.([^.?]+)(?:\?|$)/);
+		return match ? match[1] : '';
+	};
+
+	// from extension, return iamge or video
+	const getType = (extension: string): 'image' | 'video' | 'other' => {
+		if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+			return 'image';
+		}
+		if (['mp4', 'webm', 'ogg'].includes(extension)) {
+			return 'video';
+		}
+		return 'other';
+	};
+
+	const files = item.files.map((srcLinkToFirebase) => {
+		const extension = getExtension(srcLinkToFirebase);
+		const type = getType(extension);
+		return {
+			src: srcLinkToFirebase,
+			isImage: type === 'image',
+			type: type + '/' + extension
+		};
+	});
+
 	// parse the item to fields to show in item view
 	// iterate through item key value pairs and show them
 	// use fieldsInMeta to parse the fields values
@@ -94,7 +122,7 @@
 			<ButtonBase on:click={() => window.history.back()}>Navigate back</ButtonBase>
 		</div>
 	</div>
-	<ItemViewPhoto srcs={item.files} />
+	<ItemViewPhoto {files} />
 </div>
 
 <style>

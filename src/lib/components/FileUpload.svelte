@@ -64,7 +64,14 @@
 			tabindex="0"
 		>
 			Drag and drop files for the item here or
-			<input type="file" multiple on:change={handleChange} hidden bind:this={fileInput} />
+			<input
+				type="file"
+				multiple
+				on:change={handleChange}
+				hidden
+				bind:this={fileInput}
+				accept="image/*,video/*"
+			/>
 			<button class="visible-button" tabindex="-1" on:click={openFileDialog}> Select files </button>
 			<span class="selected-files" aria-live="polite" role="status">
 				{#if $store.length === 0}

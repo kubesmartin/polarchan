@@ -3,40 +3,29 @@
 	import ButtonLink from './ButtonLink.svelte';
 	import ItemViewPhotoVideo from './ItemViewPhotoVideo.svelte';
 
-	export let srcs: string[] = [];
+	export let files: Array<{ src: string; isImage: boolean; type: string }>;
+	export let hideTitle: boolean = false;
 	let current = 0;
-
-	const isImage = (src: string) => {
-		// beware, there are searchParams in the URL
-		const url = new URL(src);
-		const extension = url.pathname.split('.').pop();
-		if (
-			extension === 'jpg' ||
-			extension === 'jpeg' ||
-			extension === 'png' ||
-			extension === 'webp'
-		) {
-			return true;
-		}
-	};
 </script>
 
 <div class="main">
-	<h2>Material {current + 1} of {srcs.length}</h2>
-	{#if srcs.length > 0}
-		{#if isImage(srcs[current])}
-			<img src={srcs[current]} alt="item image" />
+	{#if !hideTitle}
+		<h2>File {current + 1} of {files.length}</h2>
+	{/if}
+	{#if files.length > 0}
+		{#if files[current].isImage}
+			<img src={files[current].src} alt="item image" />
 		{:else}
-			<ItemViewPhotoVideo src={srcs[current]} />
+			<ItemViewPhotoVideo src={files[current].src} type={files[current].type} />
 		{/if}
 		<div class="controls">
-			{#if srcs.length > 1}
-				<ButtonBase on:click={() => (current = (current - 1 + srcs.length) % srcs.length)}
+			{#if files.length > 1}
+				<ButtonBase on:click={() => (current = (current - 1 + files.length) % files.length)}
 					>Previous</ButtonBase
 				>
-				<ButtonBase on:click={() => (current = (current + 1) % srcs.length)}>Next</ButtonBase>
+				<ButtonBase on:click={() => (current = (current + 1) % files.length)}>Next</ButtonBase>
 			{/if}
-			<ButtonLink href={srcs[current]} target="_blank">Open in new tab</ButtonLink>
+			<ButtonLink href={files[current].src} target="_blank">Open in new tab</ButtonLink>
 		</div>
 	{:else}
 		<p>No images found</p>

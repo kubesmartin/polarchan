@@ -9,6 +9,7 @@
 	import type { IAuthService } from '$lib/interfaces/IAuthService';
 	import type { Fields } from '$lib/config/meta';
 	import { base } from '$app/paths';
+	import { createEventDispatcher } from 'svelte';
 
 	export let metaDataStore: Writable<Fields>;
 	export let filesStore: Writable<File[]>;
@@ -18,6 +19,11 @@
 	let errorMessages: string[] = [];
 
 	const auth: IAuthService = getContext('auth');
+
+	const dispatch = createEventDispatcher();
+	const goBack = () => {
+		dispatch('back');
+	};
 
 	const submit = async () => {
 		if (isUploading) return;
@@ -68,7 +74,10 @@
 	{#if isUploading}
 		<p>Uploading...</p>
 	{:else}
-		<ButtonBase type="submit">Confirm and upload</ButtonBase>
+		<div>
+			<ButtonBase type="button" on:click={goBack}>Go back to metadata</ButtonBase>
+			<ButtonBase type="submit">Confirm and upload</ButtonBase>
+		</div>
 	{/if}
 </form>
 
