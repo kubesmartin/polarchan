@@ -98,8 +98,8 @@
 	ul {
 		list-style-type: none;
 		padding: 0;
-		display: flex;
-		gap: 1rem;
-		flex-wrap: wrap;
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: repeat(auto-fill, 200px);
 	}
 </style>

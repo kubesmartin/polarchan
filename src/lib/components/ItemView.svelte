@@ -17,7 +17,7 @@
 
 	// from extension, return iamge or video
 	const getType = (extension: string): 'image' | 'video' | 'other' => {
-		if (['jpg', 'jpeg', 'png', 'gif'].includes(extension)) {
+		if (['jpg', 'jpeg', 'png', 'gif', 'webp'].includes(extension)) {
 			return 'image';
 		}
 		if (['mp4', 'webm', 'ogg'].includes(extension)) {
