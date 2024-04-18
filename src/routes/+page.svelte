@@ -8,6 +8,14 @@
 	import ItemShowcase from '$lib/components/ItemShowcase.svelte';
 </script>
 
+<svelte:head>
+	<title>PolARCHAN: Archive, browse and analyse political advertisements</title>
+	<meta
+		name="description"
+		content="PolARCHAN is a platform that allows you to archive, browse and analyse political advertisements."
+	/>
+</svelte:head>
+
 <BorderWrap>
 	<Hero>
 		<h1>Page not found</h1>
