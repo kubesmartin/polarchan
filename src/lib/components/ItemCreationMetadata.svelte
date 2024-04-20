@@ -5,19 +5,37 @@
 	import SubmitHolder from './SubmitHolder.svelte';
 	import BaseSelect from './BaseSelect.svelte';
 	import NumericalInput from './NumericalInput.svelte';
-	import { fieldsInMeta, type Fields } from '$lib/config/meta';
+	import { type Fields, fieldsInMeta } from '$lib/config/meta';
 	import type { Writable } from 'svelte/store';
 	import ItemViewPhoto from './ItemViewPhoto.svelte';
 	import LayoutColumnsTwo from './LayoutColumnsTwo.svelte';
+	import { deepCopy } from '$lib/utils/copy';
 
 	const dispatch = createEventDispatcher();
 
 	export let store: Writable<Fields>;
 	export let files: Writable<File[]>;
 
-	let fields: Fields = $store.length > 0 ? $store : fieldsInMeta;
+	// Deep clone the fields to avoid modifying the original
+	let metaFields: Fields = deepCopy(fieldsInMeta);
+
+	let fields: Fields = $store.length > 0 ? $store : metaFields;
+	console.log(fields, metaFields, $store);
 
 	let errors: string[] = [];
+
+	// Reactively check fields "case" function, if false,
+	// automatically set the field value to empty string or []
+	$: fields = fields.map((field) => {
+		if (field.case && !field.case(fields)) {
+			if (field.type === 'select-multiple') {
+				field.value = [];
+			} else {
+				field.value = '';
+			}
+		}
+		return field;
+	});
 
 	const submit = () => {
 		// check if all fields with .required are filled
