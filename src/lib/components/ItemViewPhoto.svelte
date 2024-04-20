@@ -1,16 +1,18 @@
 <script lang="ts">
 	import ButtonBase from './ButtonBase.svelte';
 	import ButtonLink from './ButtonLink.svelte';
+	import Heading2 from './Heading2.svelte';
 	import ItemViewPhotoVideo from './ItemViewPhotoVideo.svelte';
 
 	export let files: Array<{ src: string; isImage: boolean; type: string }>;
 	export let hideTitle: boolean = false;
 	let current = 0;
+	let title = `File ${current + 1} of ${files.length}`;
 </script>
 
 <div class="main">
 	{#if !hideTitle}
-		<h2>File {current + 1} of {files.length}</h2>
+		<Heading2 text={title} />
 	{/if}
 	{#if files.length > 0}
 		{#if files[current].isImage}

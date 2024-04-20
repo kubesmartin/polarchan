@@ -32,4 +32,19 @@
 			cursor: not-allowed;
 		}
 	}
+	@media (max-width: 1200px) {
+		button {
+			font-size: 1.15rem;
+		}
+	}
+	@media (max-width: 800px) {
+		button {
+			font-size: 1.1rem;
+		}
+	}
+	@media (max-width: 600px) {
+		button {
+			font-size: 1rem;
+		}
+	}
 </style>

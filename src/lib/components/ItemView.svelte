@@ -5,6 +5,7 @@
 	import ItemViewPhoto from './ItemViewPhoto.svelte';
 	import ButtonLink from './ButtonLink.svelte';
 	import { base } from '$app/paths';
+	import Heading2 from './Heading2.svelte';
 
 	export let item: PoliticalItem;
 
@@ -107,9 +108,7 @@
 
 <div class="grid">
 	<div>
-		<h2>
-			ID {item.id}
-		</h2>
+		<Heading2 text={'ID ' + item.id} />
 		<div class="fields">
 			{#each fields as field}
 				{#if field.label !== 'id' && field.value !== ''}
@@ -120,6 +119,11 @@
 				{/if}
 			{/each}
 		</div>
+		<p>
+			Found an issue with this item? <a href="mailto:kontakt@kubesmartin.cz"
+				>Contact administrator</a
+			>
+		</p>
 		<div class="buttons">
 			<ButtonBase on:click={() => window.history.back()}>Navigate back</ButtonBase>
 			<ButtonLink href={base + '/items'}>All items</ButtonLink>

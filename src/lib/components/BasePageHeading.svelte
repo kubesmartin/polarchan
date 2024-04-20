@@ -11,4 +11,19 @@
 		margin-top: 0;
 		margin-bottom: 2rem;
 	}
+	@media (max-width: 800px) {
+		h1 {
+			font-size: 2rem;
+		}
+	}
+	@media (max-width: 600px) {
+		h1 {
+			font-size: 2rem;
+		}
+	}
+	@media (max-width: 400px) {
+		h1 {
+			font-size: 1.5rem;
+		}
+	}
 </style>

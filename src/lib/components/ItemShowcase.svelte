@@ -72,15 +72,18 @@
 		.inner {
 			grid-template-columns: 1fr 1fr;
 		}
-		@media (max-width: 600px) {
-			h2 {
-				font-size: 1.8rem;
-			}
+	}
+	@media (max-width: 600px) {
+		h2 {
+			font-size: 1.8rem;
 		}
-		@media (max-width: 400px) {
-			h2 {
-				font-size: 1.25rem;
-			}
+	}
+	@media (max-width: 400px) {
+		h2 {
+			font-size: 1.25rem;
+		}
+		.inner {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

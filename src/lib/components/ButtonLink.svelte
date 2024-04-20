@@ -28,4 +28,19 @@
 			pointer-events: none;
 		}
 	}
+	@media (max-width: 1200px) {
+		a {
+			font-size: 1.15rem;
+		}
+	}
+	@media (max-width: 800px) {
+		a {
+			font-size: 1.1rem;
+		}
+	}
+	@media (max-width: 600px) {
+		a {
+			font-size: 1rem;
+		}
+	}
 </style>
