@@ -45,4 +45,15 @@
 		right: 0;
 		top: 0;
 	}
+	@media (max-width: 1024px) {
+		.background {
+			grid-template-columns: 1fr;
+		}
+		.sign-in-container {
+			width: 100%;
+		}
+		.background img {
+			max-height: calc(50vh + 125px);
+		}
+	}
 </style>
