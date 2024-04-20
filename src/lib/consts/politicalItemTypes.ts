@@ -1,1 +1,1 @@
-export const politicalItemTypes = ['mass-printed', 'spot', 'other'] as const;
+export const politicalItemTypes = ['mass-printed', 'spot', 'other', 'publication'] as const;
