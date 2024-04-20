@@ -14,4 +14,9 @@
 		min-height: calc(100vh - 1.2rem);
 		box-sizing: border-box;
 	}
+	@media (max-width: 600px) {
+		.wrap {
+			border-width: 0.8rem;
+		}
+	}
 </style>

@@ -49,4 +49,10 @@
 			flex-direction: column;
 		}
 	}
+	@media (max-width: 600px) {
+		nav {
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+	}
 </style>

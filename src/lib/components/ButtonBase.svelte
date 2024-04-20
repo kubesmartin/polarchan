@@ -24,7 +24,8 @@
 		font-family: var(--font-body);
 		&:hover {
 			color: var(--c-accent-brand);
-			border-color: var(--c-accent-brand);
+			background: var(--c-brand);
+			border-color: var(--c-brand);
 		}
 		&:disabled {
 			border-color: var(--c-accent-black);
