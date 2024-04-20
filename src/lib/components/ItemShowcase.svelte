@@ -23,7 +23,7 @@
 
 <div class="outer">
 	<WidthHolder>
-		<h2>Newest items archived in polARCHAN</h2>
+		<h2>Newest items archived in PolARCHAN</h2>
 		<div class="inner">
 			{#await items}
 				<div class="placeholder" />
